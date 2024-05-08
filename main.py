@@ -86,11 +86,11 @@ async def chat(bot, update):
             [
                 [
                     InlineKeyboardButton("Get Key 🔐", callback_data="get_key"),
-                    InlineKeyboardButton("Verify ✅", callback_data="verify_user")
+                    InlineKeyboardButton("Verify ✅", callback_data="verify")
                 ],
                 [
-                    InlineKeyboardButton("Check Status ⭐", callback_data="check_user_status"),
-                    InlineKeyboardButton("Check Total Keys 👿", callback_data="check_total_keys")
+                    InlineKeyboardButton("Check Status ⭐", callback_data="check_status"),
+                    InlineKeyboardButton("Check Total Keys 👿", callback_data="check_keys")
                 ]
             ]
         )
@@ -102,13 +102,12 @@ async def button(bot, update):
     # Check which button is clicked
     if update.data == "get_key":
         await send_key(bot, update.message)
-    elif update.data == "verify_user":
+    elif update.data == "verify":
         await verify_user(bot, update)
-    elif update.data == "check_user_status":
+    elif update.data == "check_status":
         await check_user_status(bot, update)
-    elif update.data == "check_total_keys":
+    elif update.data == "check_keys":
         await check_total_keys(bot, update)
 
 # Bot ko run karein
 Bot.run()
-        
