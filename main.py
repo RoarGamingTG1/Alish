@@ -25,12 +25,9 @@ Bot = Client(
 # Function to send start message with image and buttons
 async def send_start_message(update):
     # Send welcome message with options and image
-    welcome_message = "Welcome to the chat! Select an option below:"
+    welcome_message = "Welcome to the xalishToolkit ! write Key Text here 💟 Join Us Cilick her @QTVinfo if any Problem You Can Msg Me Here I will Reply 🥰💕💒:"
     keyboard = InlineKeyboardMarkup(
         [
-            [
-                InlineKeyboardButton("Get Key", callback_data="get_key")
-            ],
             [
                 InlineKeyboardButton("Check Total Keys", callback_data="check_keys")
             ]
@@ -45,16 +42,15 @@ async def send_start_message(update):
 # Function to generate and send key
 async def send_key(update):
     global total_keys_issued
-    chat_id = update.chat.id
-    user = update.from_user.id
-    if user in user_keys.values():
-        existing_key = next((key for key, value in user_keys.items() if value == user), None)
+    user = update.from_user
+    if user.id in user_keys.values():
+        existing_key = next((key for key, value in user_keys.items() if value == user.id), None)
         await update.reply_text(f"Your key is: {existing_key}")
     else:
         # Check if user has joined the channel
-        if await Bot.get_chat_member(int(CHANNEL_ID), user):
+        if await Bot.get_chat_member(int(CHANNEL_ID), user.id):
             key = f"XALISHB{len(user_keys) + 1}"
-            user_keys[key] = user
+            user_keys[key] = user.id
             total_keys_issued += 1  # Increment total keys issued
             await update.reply_text(f"Your key is: {key}")
         else:
@@ -68,16 +64,14 @@ async def check_total_keys(update):
     await update.reply_text(f"Total keys issued: {total_keys_issued}")
 
 # Message handler
-@Bot.on_message(filters.private)
+@Bot.on_message(filters.private & filters.text)
 async def chat(bot, update):
     # Extract message text
     message_text = update.text.lower()
 
-    # Check if the user is asking for key or checking total keys
-    if "get key" in message_text:
+    # Check if the message contains the word "key"
+    if "key" in message_text:
         await send_key(update)
-    elif "check keys" in message_text:
-        await check_total_keys(update)
     else:
         # Send welcome message with options
         await send_start_message(update)
@@ -89,9 +83,7 @@ async def button(bot, update):
     callback_data = update.data
     chat_id = update.message.chat.id
     # Check which button is clicked
-    if callback_data == "get_key":
-        await send_key(update.message)
-    elif callback_data == "check_keys":
+    if callback_data == "check_keys":
         await check_total_keys(update.message)
 
 # Command handler
@@ -102,4 +94,3 @@ async def start(bot, update):
 
 # Bot ko run karein
 Bot.run()
-    
