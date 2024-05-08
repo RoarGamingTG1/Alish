@@ -39,7 +39,7 @@ async def answer_question(bot, update):
 
 # Function to send welcome message
 async def send_welcome_message(bot, chat_id):
-    await bot.send_message(chat_id, "Welcome to the ChatBot! Click on 'Key' button to get your key.")
+    await bot.send_message(chat_id, "Welcome to the XalishToolkit ! Write 'Key'  Here to get your key For More Join @QTVinfo 🦋🎁💒🎉 Key k lye Neche Key Likhen Apko Apna Key Mill Jayega Phir Bhi Koi Problem Hai To Hamara Channel Join Kren Shukriya 🦋💒💕.")
 
 # Function to generate and send key
 async def send_key(bot, update):
