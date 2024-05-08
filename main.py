@@ -13,7 +13,6 @@ qa_data = {
     "Apka name kia hai": "Name men kia rakha hai .",
     "how are you": "Not fine 😔.",
     "Pubg khelty ho ": "Pubg is My favourite Game 🫥.",
-    "Key": "Ok 🌀💒 Join Channel @QTVinfo",
     "😭": "Ro mat nhi To Block Krdongi 🫥.",
     "200": "update Soon Join 🫥.",
     "🙄": "😒."
@@ -27,6 +26,22 @@ Bot = Client(
     api_hash=API_HASH
 )
 
+# Function to send welcome message
+async def send_welcome_message(bot, chat_id):
+    await bot.send_message(chat_id, "Welcome to the ChatBot! Click on 'Key' button to get your key.")
+
+# Function to generate and send key
+async def send_key(bot, update):
+    chat_id = update.chat.id
+    user = update.from_user.id
+    if user in user_keys.values():
+        existing_key = next((key for key, value in user_keys.items() if value == user), None)
+        await bot.send_message(chat_id, f"You already have a key: {existing_key}")
+    else:
+        key = f"XALISHB{len(user_keys) + 1}"
+        user_keys[key] = user
+        await bot.send_message(chat_id, f"Your key is: {key}")
+
 # Message handler
 @Bot.on_message(filters.private)
 async def chat(bot, update):
@@ -36,8 +51,8 @@ async def chat(bot, update):
     # Check if the user is asking a question
     if "?" in message_text:
         await answer_question(bot, update)
-    else:
-        await ask_question(bot, update)
+    elif "key" in message_text:
+        await send_key(bot, update)
 
 # Function to answer a question
 async def answer_question(bot, update):
