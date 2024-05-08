@@ -103,12 +103,12 @@ async def button(bot, update):
     if update.data == "get_key":
         await send_key(bot, update.message)
     elif update.data == "verify_user":
-        await verify_user(bot, update.message)
+        await verify_user(bot, update)
     elif update.data == "check_user_status":
-        await check_user_status(bot, update.message)
+        await check_user_status(bot, update)
     elif update.data == "check_total_keys":
-        await check_total_keys(bot, update.message)
+        await check_total_keys(bot, update)
 
 # Bot ko run karein
 Bot.run()
-    
+        
