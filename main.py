@@ -85,12 +85,12 @@ async def chat(bot, update):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("Get Key 🔐", callback_data="get_key"),
-                    InlineKeyboardButton("Verify ✅", callback_data="verify")
+                    InlineKeyboardButton("Get Key", callback_data="get_key"),
+                    InlineKeyboardButton("Verify", callback_data="verify")
                 ],
                 [
-                    InlineKeyboardButton("Check Status ⭐", callback_data="check_status"),
-                    InlineKeyboardButton("Check Total Keys 👿", callback_data="check_keys")
+                    InlineKeyboardButton("Check Status", callback_data="check_status"),
+                    InlineKeyboardButton("Check Total Keys", callback_data="check_keys")
                 ]
             ]
         )
@@ -101,7 +101,7 @@ async def chat(bot, update):
 async def button(bot, update):
     # Check which button is clicked
     if update.data == "get_key":
-        await send_key(bot, update.message)
+        await send_key(bot, update)
     elif update.data == "verify":
         await verify_user(bot, update)
     elif update.data == "check_status":
@@ -111,3 +111,4 @@ async def button(bot, update):
 
 # Bot ko run karein
 Bot.run()
+    
