@@ -29,17 +29,15 @@ async def send_start_message(update):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Get Key", callback_data="get_key"),
-                InlineKeyboardButton("Verify", callback_data="verify")
+                InlineKeyboardButton("Get Key", callback_data="get_key")
             ],
             [
-                InlineKeyboardButton("Check Status", callback_data="check_status"),
                 InlineKeyboardButton("Check Total Keys", callback_data="check_keys")
             ]
         ]
     )
     await update.reply_photo(
-        photo="https://example.com/your-image.jpg",  # Replace with your image URL
+        photo="https://telegra.ph/file/123022afb754372e3802e.jpg",  # Replace with your image URL
         caption=welcome_message,
         reply_markup=keyboard
     )
@@ -64,22 +62,6 @@ async def send_key(update):
             join_channel_message = "Please join our channel [here](https://t.me/QTVinfo) to get the key."
             await update.reply_text(join_channel_message, disable_web_page_preview=True)
 
-# Function to handle verification process
-async def verify_user(update):
-    user = update.from_user.id
-    if await Bot.get_chat_member(int(CHANNEL_ID), user):
-        await send_key(update)
-    else:
-        await update.reply_text("You haven't joined our channel yet. Please join our channel [here](https://t.me/QTVinfo) and click 'Verify' again.", disable_web_page_preview=True)
-
-# Function to check user's own status
-async def check_user_status(update):
-    user = update.from_user.id
-    if await Bot.get_chat_member(int(CHANNEL_ID), user):
-        await update.reply_text("You have joined our channel.")
-    else:
-        await update.reply_text("You have not joined our channel yet.")
-
 # Function to check total keys issued
 async def check_total_keys(update):
     global total_keys_issued
@@ -91,32 +73,14 @@ async def chat(bot, update):
     # Extract message text
     message_text = update.text.lower()
 
-    # Check if the user is asking for key, verification, or status check
+    # Check if the user is asking for key or checking total keys
     if "get key" in message_text:
         await send_key(update)
-    elif "verify" in message_text:
-        await verify_user(update)
-    elif "check status" in message_text:
-        await check_user_status(update)
     elif "check keys" in message_text:
         await check_total_keys(update)
-
-    # Send welcome message with options
     else:
-        welcome_message = "Welcome to the chat! Select an option below:"
-        keyboard = InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton("Get Key", callback_data="get_key"),
-                    InlineKeyboardButton("Verify", callback_data="verify")
-                ],
-                [
-                    InlineKeyboardButton("Check Status", callback_data="check_status"),
-                    InlineKeyboardButton("Check Total Keys", callback_data="check_keys")
-                ]
-            ]
-        )
-        await update.reply_text(welcome_message, reply_markup=keyboard)
+        # Send welcome message with options
+        await send_start_message(update)
 
 # Button handler
 @Bot.on_callback_query()
@@ -127,10 +91,6 @@ async def button(bot, update):
     # Check which button is clicked
     if callback_data == "get_key":
         await send_key(update.message)
-    elif callback_data == "verify":
-        await verify_user(update.message)
-    elif callback_data == "check_status":
-        await check_user_status(update.message)
     elif callback_data == "check_keys":
         await check_total_keys(update.message)
 
@@ -142,4 +102,4 @@ async def start(bot, update):
 
 # Bot ko run karein
 Bot.run()
-        
+    
