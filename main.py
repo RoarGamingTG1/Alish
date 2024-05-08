@@ -13,7 +13,7 @@ user_keys = {}
 # List of predefined questions and answers
 qa_data = {
     "200": "Update ayega osmen Limit Increase Hogi 🎉💒",
-    "Anushy": "Ary Wo to Meri jan hai 🥰 .",
+    "Thanks": " 🥰 .",
     "Limit": "Join @QTVinfo update coming Soon 🎁💒💒🌀.",
     "Pubg khelty ho ": "Pubg is My favourite Game 🫥.",
     "Key": "Ok 🌀💒 Join Channel @QTVinfo",
@@ -47,16 +47,11 @@ async def send_key(bot, update):
     user = update.from_user.id
     if user in user_keys.values():
         existing_key = next((key for key, value in user_keys.items() if value == user), None)
-        await bot.send_message(chat_id, f"You already have a key: {existing_key}")
+        await bot.send_message(chat_id, f"Ye raha Apka password 🔑 Enjoy  Don't Hurt anyone' 🎁🦋😊: {existing_key}")
     else:
         key = f"XALISHB{len(user_keys) + 1}"
         user_keys[key] = user
         await bot.send_message(chat_id, f"Your key is: {key}")
-
-# Function to ask a random question
-async def ask_question(bot, update):
-    random_question = random.choice(list(qa_data.keys()))
-    await update.reply_text(random_question)
 
 # Message handler
 @Bot.on_message(filters.private)
@@ -70,7 +65,7 @@ async def chat(bot, update):
     elif "key" in message_text:
         await send_key(bot, update)
     else:
-        await ask_question(bot, update)
+        await send_welcome_message(bot, update.chat.id)
 
 # Message handler for start command
 @Bot.on_message(filters.command("start"))
@@ -81,4 +76,4 @@ async def start(bot, update):
 
 # Bot ko run karein
 Bot.run()
-        
+    
