@@ -23,45 +23,45 @@ Bot = Client(
 )
 
 # Function to generate and send key
-async def send_key(bot, update):
+async def send_key(update):
     global total_keys_issued
     chat_id = update.chat.id
     user = update.from_user.id
     if user in user_keys.values():
         existing_key = next((key for key, value in user_keys.items() if value == user), None)
-        await bot.send_message(chat_id, f"Your key is: {existing_key}")
+        await update.reply_text(f"Your key is: {existing_key}")
     else:
         # Check if user has joined the channel
-        if await bot.get_chat_member(int(CHANNEL_ID), user):
+        if await Bot.get_chat_member(int(CHANNEL_ID), user):
             key = f"XALISHB{len(user_keys) + 1}"
             user_keys[key] = user
             total_keys_issued += 1  # Increment total keys issued
-            await bot.send_message(chat_id, f"Your key is: {key}")
+            await update.reply_text(f"Your key is: {key}")
         else:
             # If user hasn't joined the channel, send a message to join
             join_channel_message = "Please join our channel [here](https://t.me/QTVinfo) to get the key."
-            await bot.send_message(chat_id, join_channel_message, disable_web_page_preview=True)
+            await update.reply_text(join_channel_message, disable_web_page_preview=True)
 
 # Function to handle verification process
-async def verify_user(bot, update):
+async def verify_user(update):
     user = update.from_user.id
-    if await bot.get_chat_member(int(CHANNEL_ID), user):
-        await send_key(bot, update)
+    if await Bot.get_chat_member(int(CHANNEL_ID), user):
+        await send_key(update)
     else:
-        await bot.send_message(update.chat.id, "You haven't joined our channel yet. Please join our channel [here](https://t.me/QTVinfo) and click 'Verify' again.", disable_web_page_preview=True)
+        await update.reply_text("You haven't joined our channel yet. Please join our channel [here](https://t.me/QTVinfo) and click 'Verify' again.", disable_web_page_preview=True)
 
 # Function to check user's own status
-async def check_user_status(bot, update):
+async def check_user_status(update):
     user = update.from_user.id
-    if await bot.get_chat_member(int(CHANNEL_ID), user):
-        await bot.send_message(update.chat.id, "You have joined our channel.")
+    if await Bot.get_chat_member(int(CHANNEL_ID), user):
+        await update.reply_text("You have joined our channel.")
     else:
-        await bot.send_message(update.chat.id, "You have not joined our channel yet.")
+        await update.reply_text("You have not joined our channel yet.")
 
 # Function to check total keys issued
-async def check_total_keys(bot, update):
+async def check_total_keys(update):
     global total_keys_issued
-    await bot.send_message(update.chat.id, f"Total keys issued: {total_keys_issued}")
+    await update.reply_text(f"Total keys issued: {total_keys_issued}")
 
 # Message handler
 @Bot.on_message(filters.private)
@@ -71,13 +71,13 @@ async def chat(bot, update):
 
     # Check if the user is asking for key, verification, or status check
     if "get key" in message_text:
-        await send_key(bot, update)
+        await send_key(update)
     elif "verify" in message_text:
-        await verify_user(bot, update)
+        await verify_user(update)
     elif "check status" in message_text:
-        await check_user_status(bot, update)
+        await check_user_status(update)
     elif "check keys" in message_text:
-        await check_total_keys(bot, update)
+        await check_total_keys(update)
 
     # Send welcome message with options
     else:
@@ -94,21 +94,20 @@ async def chat(bot, update):
                 ]
             ]
         )
-        await bot.send_message(update.chat.id, welcome_message, reply_markup=keyboard)
+        await update.reply_text(welcome_message, reply_markup=keyboard)
 
 # Button handler
 @Bot.on_callback_query()
 async def button(bot, update):
     # Check which button is clicked
     if update.data == "get_key":
-        await send_key(bot, update.message)
+        await send_key(update.message)
     elif update.data == "verify":
-        await verify_user(bot, update)
+        await verify_user(update.message)
     elif update.data == "check_status":
-        await check_user_status(bot, update)
+        await check_user_status(update.message)
     elif update.data == "check_keys":
-        await check_total_keys(bot, update)
+        await check_total_keys(update.message)
 
 # Bot ko run karein
 Bot.run()
-        
