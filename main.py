@@ -99,6 +99,8 @@ async def chat(bot, update):
 # Button handler
 @Bot.on_callback_query()
 async def button(bot, update):
+    # Extract chat ID
+    chat_id = update.message.chat.id
     # Check which button is clicked
     if update.data == "get_key":
         await send_key(update.message)
