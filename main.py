@@ -7,12 +7,16 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN")
 API_ID = os.environ.get("API_ID")
 API_HASH = os.environ.get("API_HASH")
 
+# Dictionary to store users and their generated keys
+user_keys = {}
+
 # List of predefined questions and answers
 qa_data = {
-    "Hi": "G 😊",
-    "Apka name kia hai": "Name men kia rakha hai .",
-    "how are you": "Not fine 😔.",
+    "200": "Update ayega osmen Limit Increase Hogi 🎉💒",
+    "Anushy": "Ary Wo to Meri jan hai 🥰 .",
+    "Limit": "Join @QTVinfo update coming Soon 🎁💒💒🌀.",
     "Pubg khelty ho ": "Pubg is My favourite Game 🫥.",
+    "Key": "Ok 🌀💒 Join Channel @QTVinfo",
     "😭": "Ro mat nhi To Block Krdongi 🫥.",
     "200": "update Soon Join 🫥.",
     "🙄": "😒."
@@ -25,6 +29,13 @@ Bot = Client(
     api_id=API_ID,
     api_hash=API_HASH
 )
+
+# Function to answer a question
+async def answer_question(bot, update):
+    # Check if the question exists in the predefined data
+    question = update.text.strip()
+    answer = qa_data.get(question, "Kuch Ayse Swal hen Jinka Mujhe nhi Pata Ap Join Kren Yahan Apke Har sawal Ka Jwab Milega 💒🎁🎉 @QTVinfo.")
+    await update.reply_text(answer)
 
 # Function to send welcome message
 async def send_welcome_message(bot, chat_id):
@@ -42,6 +53,11 @@ async def send_key(bot, update):
         user_keys[key] = user
         await bot.send_message(chat_id, f"Your key is: {key}")
 
+# Function to ask a random question
+async def ask_question(bot, update):
+    random_question = random.choice(list(qa_data.keys()))
+    await update.reply_text(random_question)
+
 # Message handler
 @Bot.on_message(filters.private)
 async def chat(bot, update):
@@ -53,18 +69,8 @@ async def chat(bot, update):
         await answer_question(bot, update)
     elif "key" in message_text:
         await send_key(bot, update)
-
-# Function to answer a question
-async def answer_question(bot, update):
-    # Check if the question exists in the predefined data
-    question = update.text.strip()
-    answer = qa_data.get(question, "Kuch Ayse Swal hen Jinka Mujhe nhi Pata Ap Join Kren Yahan Apke Har sawal Ka Jwab Milega 💒🎁🎉 @QTVinfo.")
-    await update.reply_text(answer)
-
-# Function to ask a random question
-async def ask_question(bot, update):
-    random_question = random.choice(list(qa_data.keys()))
-    await update.reply_text(random_question)
+    else:
+        await ask_question(bot, update)
 
 # Message handler for start command
 @Bot.on_message(filters.command("start"))
@@ -75,3 +81,4 @@ async def start(bot, update):
 
 # Bot ko run karein
 Bot.run()
+        
