@@ -101,7 +101,7 @@ async def chat(bot, update):
 async def button(bot, update):
     # Check which button is clicked
     if update.data == "get_key":
-        await send_key(bot, update)
+        await send_key(bot, update.message)
     elif update.data == "verify":
         await verify_user(bot, update)
     elif update.data == "check_status":
@@ -111,4 +111,4 @@ async def button(bot, update):
 
 # Bot ko run karein
 Bot.run()
-    
+        
