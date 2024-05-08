@@ -13,10 +13,10 @@ qa_data = {
     "Apka name kia hai": "Name men kia rakha hai .",
     "how are you": "Not fine 😔.",
     "Pubg khelty ho ": "Pubg is My favourite Game 🫥.",
-    "Key": "@MadGamerTG 🔐 Wohan se Download Kro",
+    "Key": "Ok 🌀💒 Join Channel @QTVinfo",
     "😭": "Ro mat nhi To Block Krdongi 🫥.",
-    "😡": "Gusa Nhi Krty Babu 🫥.",
-    "🙄": "Tu ki jany Pyar Mera."
+    "200": "update Soon Join 🫥.",
+    "🙄": "😒."
 }
 
 # Bot ko create karein
@@ -43,13 +43,20 @@ async def chat(bot, update):
 async def answer_question(bot, update):
     # Check if the question exists in the predefined data
     question = update.text.strip()
-    answer = qa_data.get(question, "Sorry, I don't know the answer to that question.")
+    answer = qa_data.get(question, "Kuch Ayse Swal hen Jinka Mujhe nhi Pata Ap Join Kren Yahan Apke Har sawal Ka Jwab Milega 💒🎁🎉 @QTVinfo.")
     await update.reply_text(answer)
 
 # Function to ask a random question
 async def ask_question(bot, update):
     random_question = random.choice(list(qa_data.keys()))
     await update.reply_text(random_question)
+
+# Message handler for start command
+@Bot.on_message(filters.command("start"))
+async def start(bot, update):
+    # Start message
+    start_message = "Welcome To AlishToolkit 🎁 If You Want Key Write Key Join Our Channel Free All Pro Tips @QTVinfo"
+    await update.reply_text(start_message)
 
 # Bot ko run karein
 Bot.run()
