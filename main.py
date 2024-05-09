@@ -1,53 +1,78 @@
-from pyrogram import Client, filters
+import os
 import random
-import re
+from pyrogram import Client, filters
 
-# Telegram bot token
-API_ID = "your_api_id"
-API_HASH = "your_api_hash"
-BOT_TOKEN = "your_telegram_bot_token"
+# Bot ke credentials
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+API_ID = os.environ.get("API_ID")
+API_HASH = os.environ.get("API_HASH")
 
-# Create a bot instance
+# List of specific words and their corresponding dangerous responses
+specific_words = {
+    "hello": "Khatra hai, mujhse panga mat lena!",
+    "game": "Game? Game over hone wala hai tera!",
+    "hack": "Hack? Mere jaisa hacker koi aur nahi!",
+    "power": "Power? Tere paas kya hai? Main toh power ka baap hoon!",
+    "fool": "Fool? Mere saamne mat bol, nahi toh teri khair nahi!",
+    "love": "Love? Mere liye sirf destruction hi love hai!",
+    "challenge": "Challenge? Mere liye toh ye sirf ek mazaak hai!",
+    "secret": "Secret? Mere paas sab secrets hain, teri bhi!",
+    "battle": "Battle? Tumhare liye toh ye sirf ek nightmare hoga!",
+    "enemy": "Enemy? Mere liye toh tum sabhi enemies ho!",
+    "victory": "Victory? Meri toh bas shuruaat hai, abhi toh game khela nahi shuru hua!",
+    "defeat": "Defeat? Mere dictionary mein aise words nahi hote!",
+    "revenge": "Revenge? Mere pasandeeda hobby hai!"
+}
+
+# List of emojis and their corresponding dangerous responses
+dangerous_emojis = {
+    "😈": "Teri himmat kaise hui mujhse panga lene ki?",
+    "🔥": "Agar mujhe gussa dilaya toh teri life ka aakhri din hoga!",
+    "💣": "Ye bomb nahi, tera future hai!",
+    "🗡️": "Tera game over hone wala hai, chhuri mere haath mein hai!",
+    "👿": "Mujhe nafrat hai, aur teri life bhi mujhse nafrat karegi!",
+    "🤬": "Shor mat macha, varna tujhe dekh kar main angry hounga!",
+    "💀": "Tu toh mar gaya beta, ab bas ghost ban ke ghoomta reh!"
+}
+
+# Bot ko create karein
 Bot = Client(
-    "insult",
+    "ChatBot",
     bot_token=BOT_TOKEN,
     api_id=API_ID,
     api_hash=API_HASH
 )
 
-# Function to generate random insult
-def generate_insult():
-    insults = [
-        "Teri himmat kaise hui Mad ke saamne aane ki?",
-        "Mad ke saamne aane se pehle, apna antim sanskar kar lo!",
-        "Tu toh Mad ke saamne kuch bhi nahi hai!",
-        "Mad tera kya ukhaad lega! Tu toh bekaar hai!",
-        "Kis mitti ki bani hai tu? Mad ke saamne mat aana warna dho dalega!"
-    ]
-    return random.choice(insults)
+# Message handler
+@Bot.on_message(filters.private)
+async def chat(bot, update):
+    # Extract message text
+    message_text = update.text.lower()
 
-# Function to praise Mad in the group
-def praise_mad(bot, message):
-    praises = [
-        "Dosto, Mad ke baare mein suna hai? Wo PUBG ka ultimate champion hai!",
-        "Mad, tu toh legend hai! Tere jaisa PUBG player duniya mein ek hi hai!",
-        "Mad ki strategy dekh kar hi seekhna chahiye, kaise game ko dominate karte hain!",
-        "Mad ke saath khel kar, dushmanon ka koi bharosa nahi!",
-        "Kisiko Mad se panga lene ka himmat hai toh aa jaye, warna bhag jaaye!"
-    ]
-    praise = random.choice(praises)
-    bot.send_message(message.chat.id, praise)
+    # Check if any specific word is present in the message
+    for word in specific_words.keys():
+        if word in message_text:
+            await respond_dangerously(bot, update)
+            return
 
-# Handler for incoming messages
-@bot.on_message(filters.command("insult") | filters.regex(r"insult", re.IGNORECASE))
-def send_insult(bot, message):
-    insult = generate_insult()
-    bot.send_message(message.chat.id, insult)
+    # Check if any dangerous emoji is present in the message
+    for emoji in dangerous_emojis.keys():
+        if emoji in message_text:
+            await respond_with_emoji(bot, update, emoji)
+            return
 
-# Handler for new members joining the group
-@bot.on_message(filters.new_chat_members)
-def welcome_new_member(bot, message):
-    praise_mad(bot, message)
+# Function to respond with a dangerous message
+async def respond_dangerously(bot, update):
+    # Select a random dangerous response
+    response = random.choice(list(specific_words.values()))
+    await update.reply_text(response)
 
-# Start the bot
-bot.run()
+# Function to respond with a dangerous message using emoji
+async def respond_with_emoji(bot, update, emoji):
+    # Get the dangerous response corresponding to the emoji
+    response = dangerous_emojis.get(emoji, "Kuch toh gadbad hai, mujhe samajh nahi aa raha.")
+    await update.reply_text(response)
+
+# Bot ko run karein
+Bot.run()
+    
