@@ -1,43 +1,47 @@
-import telebot
+from pyrogram import Client, filters
 import random
 
 # Telegram bot token
-TOKEN = 'apna_telegram_bot_token_yahan_dalen'
+API_ID = "your_api_id"
+API_HASH = "your_api_hash"
+TOKEN = "your_telegram_bot_token"
 
 # Create a bot instance
-bot = telebot.TeleBot(TOKEN)
+bot = Client("InsultBot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
-# Function to handle incoming messages
-@bot.message_handler(func=lambda message: True)
-def echo_all(message):
-    # Function to generate random response
-    response = generate_response()
-    bot.reply_to(message, response)
-
-# Function to generate random response
-def generate_response():
-    responses = [
-        "تمہیں لعنت دی گئی ہے! امید کرو کہ جہاں بھی جاؤ، نحوستی تمہارا پیچھا کرے گی۔",
-        "مبارک ہو! تم نے ایک سفری بوائے کی ٹکٹ جیت لی ہے جوزاہنم میں پہنچنے کا آرام کریں۔ اپنی دائمی عذاب کا لطف اٹھائیں!",
-        "خبردار! سایہ تمہیں دیکھ رہا ہے...",
-        "تمہارے سیاہ خفیہ اسرار میرے حوالے میں ہیں۔ آج رات اچھی طرح سونا...",
-        "تمہارا وقت ختم ہو رہا ہے...",
-        "ختم ہونے والا ہے...",
-        "میں تمہیں دیکھ رہا ہوں...",
-        "تمہارا مقدر بچ نہیں سکتا...",
-        "تمہاری مصیبت مجھے خوشی دیتی ہے... 😈",
-        "میں وہ تارا ہوں جو لوگوں کے دلوں میں چھپا ہے...",
-        "آپ کی خوابوں کا کھیل میں ہوں...",
-        "رات کو آپ کو سننے والے اسراری گپشپ وہ میں ہوں...",
-        "آپ صرف میرے بڑے منصوبے کا ایک پیشہ ہیں...",
-        "ہر قدم آپ کو اپنی تباہی کے قریب لاتا ہے...",
-        "روشنی نہیں ہے، صرف تاریکی ہے... 😈",
-        "خوش آمدید! میں آپ کو دوزخ کی مدد گار ہوں۔ آپ کا خیر مقدم ہے ۔ 😈",
-        "تیار ہو جاؤ! آپ کا مقدر میں لا رہا ہوں... 😈",
-        "کیا آپ کو بھی مجھ سے ڈر لگتا ہے؟ اچھا لگتا ہے! 😈",
-        "آپ کو کیا لگتا ہے؟ کوئی بچا پایے گا؟ بہت مضبوط! 😈"
+# Function to generate random insult
+def generate_insult():
+    insults = [
+        "Teri himmat kaise hui Mad ke saamne aane ki?",
+        "Mad ke saamne aane se pehle, apna antim sanskar kar lo!",
+        "Tu toh Mad ke saamne kuch bhi nahi hai!",
+        "Mad tera kya ukhaad lega! Tu toh bekaar hai!",
+        "Kis mitti ki bani hai tu? Mad ke saamne mat aana warna dho dalega!"
     ]
-    return random.choice(responses)
+    return random.choice(insults)
+
+# Function to praise Mad in the group
+def praise_mad(bot, message):
+    praises = [
+        "Dosto, Mad ke baare mein suna hai? Wo PUBG ka ultimate champion hai!",
+        "Mad, tu toh legend hai! Tere jaisa PUBG player duniya mein ek hi hai!",
+        "Mad ki strategy dekh kar hi seekhna chahiye, kaise game ko dominate karte hain!",
+        "Mad ke saath khel kar, dushmanon ka koi bharosa nahi!",
+        "Kisiko Mad se panga lene ka himmat hai toh aa jaye, warna bhag jaaye!"
+    ]
+    praise = random.choice(praises)
+    bot.send_message(message.chat.id, praise)
+
+# Handler for incoming messages
+@bot.on_message(filters.command("insult") | filters.regex(r"insult", re.IGNORECASE))
+def send_insult(bot, message):
+    insult = generate_insult()
+    bot.send_message(message.chat.id, insult)
+
+# Handler for new members joining the group
+@bot.on_message(filters.new_chat_members)
+def welcome_new_member(bot, message):
+    praise_mad(bot, message)
 
 # Start the bot
-bot.polling()
+bot.run()
