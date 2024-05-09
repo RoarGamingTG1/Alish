@@ -1,4 +1,5 @@
 import os
+import random
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -6,13 +7,21 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 API_ID = os.environ.get("API_ID")
 API_HASH = os.environ.get("API_HASH")
-CHANNEL_ID = os.environ.get("CHANNEL_ID")  # Add your channel ID here
-
-# Variable to keep track of total keys issued
-total_keys_issued = 0
 
 # Dictionary to store users and their generated keys
 user_keys = {}
+
+# List of predefined questions and answers
+qa_data = {
+    "Hi": "G 😊",
+    "Apka name kia hai": "Name men kia rakha hai .",
+    "how are you": "Not fine 😔.",
+    "Pubg khelty ho ": "Pubg is My favourite Game 🫥.",
+    "Key": "Ok 🌀💒 Join Channel @QTVinfo",
+    "😭": "Ro mat nhi To Block Krdongi 🫥.",
+    "200": "update Soon Join 🫥.",
+    "🙄": "😒."
+}
 
 # Bot ko create karein
 Bot = Client(
@@ -22,76 +31,67 @@ Bot = Client(
     api_hash=API_HASH
 )
 
-# Function to send start message with image and buttons
-async def send_start_message(update):
-    # Send welcome message with options and image
-    welcome_message = "Welcome to the xalish Toolkit! Write ✍️ a Key Here 🌟 For More Join @QTVinfo any Questions msg Here I will reply You Soon 💒💕🎉:"
-    keyboard = InlineKeyboardMarkup(
-        [
+# Function to answer a question
+async def answer_question(bot, update):
+    # Check if the question exists in the predefined data
+    question = update.text.strip()
+    answer = qa_data.get(question, "Kuch Ayse Swal hen Jinka Mujhe nhi Pata Ap Join Kren Yahan Apke Har sawal Ka Jwab Milega 💒🎁🎉 @QTVinfo.")
+    await update.reply_text(answer)
+
+# Function to send welcome message
+async def send_welcome_message(bot, chat_id):
+    # Send photo with caption and inline keyboard
+    await bot.send_photo(
+        chat_id,
+        photo="https://telegra.ph/file/2f44a7f4d8dfc9c8c8fb7.jpg",
+        caption="Welcome to the ChatBot! Click on 'Key' button to get your key or Join Our Channel for more info.",
+        reply_markup=InlineKeyboardMarkup(
             [
-                InlineKeyboardButton("Check Total Keys", callback_data="check_keys")
+                [
+                    InlineKeyboardButton("Key", callback_data="key"),
+                    InlineKeyboardButton("Join Channel", url="https://t.me/QTVinfo")
+                ]
             ]
-        ]
-    )
-    await update.reply_photo(
-        photo="https://telegra.ph/file/123022afb754372e3802e.jpg",  # Replace with your image URL
-        caption=welcome_message,
-        reply_markup=keyboard
+        )
     )
 
 # Function to generate and send key
-async def send_key(update):
-    global total_keys_issued
-    user = update.from_user
-    if user.id in user_keys.values():
-        existing_key = next((key for key, value in user_keys.items() if value == user.id), None)
-        await update.reply_text(f"Your key is: {existing_key}")
+async def send_key(bot, update):
+    chat_id = update.chat.id
+    user = update.from_user.id
+    if user in user_keys.values():
+        existing_key = next((key for key, value in user_keys.items() if value == user), None)
+        await bot.send_message(chat_id, f"You already have a key: {existing_key}")
     else:
-        # Check if user has joined the channel
-        if await Bot.get_chat_member(int(CHANNEL_ID), user.id):
-            key = f"XALISHB{len(user_keys) + 1}"
-            user_keys[key] = user.id
-            total_keys_issued += 1  # Increment total keys issued
-            await update.reply_text(f"Your key is: {key}")
-        else:
-            # If user hasn't joined the channel, send a message to join
-            join_channel_message = "Please join our channel [here](https://t.me/QTVinfo) to get the key."
-            await update.reply_text(join_channel_message, disable_web_page_preview=True)
+        key = f"XALISHB{len(user_keys) + 1}"
+        user_keys[key] = user
+        await bot.send_message(chat_id, f"Your key is: {key}")
 
-# Function to check total keys issued
-async def check_total_keys(update):
-    global total_keys_issued
-    await update.reply_text(f"Total keys issued: {total_keys_issued}")
+# Function to ask a random question
+async def ask_question(bot, update):
+    random_question = random.choice(list(qa_data.keys()))
+    await update.reply_text(random_question)
 
 # Message handler
-@Bot.on_message(filters.private & (filters.text | filters.command(["key"])))
+@Bot.on_message(filters.private)
 async def chat(bot, update):
     # Extract message text
     message_text = update.text.lower()
 
-    # Check if the message contains the word "key"
-    if "key" in message_text:
-        await send_key(update)
+    # Check if the user is asking a question
+    if "?" in message_text:
+        await answer_question(bot, update)
+    elif "key" in message_text:
+        await send_key(bot, update)
     else:
-        # Send welcome message with options
-        await send_start_message(update)
+        await ask_question(bot, update)
 
-# Button handler
-@Bot.on_callback_query()
-async def button(bot, update):
-    # Extract callback data
-    callback_data = update.data
-    chat_id = update.message.chat.id
-    # Check which button is clicked
-    if callback_data == "check_keys":
-        await check_total_keys(update.message)
-
-# Command handler
-@Bot.on_message(filters.command(["start"]))
+# Message handler for start command
+@Bot.on_message(filters.command("start"))
 async def start(bot, update):
-    # Call the function to send the start message with image and buttons
-    await send_start_message(update)
+    # Call send_welcome_message function to send welcome message with photo and inline keyboard
+    await send_welcome_message(bot, update.chat.id)
 
 # Bot ko run karein
 Bot.run()
-            
+    
