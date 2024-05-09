@@ -6,7 +6,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 API_ID = os.environ.get("API_ID")
 API_HASH = os.environ.get("API_HASH")
-CHANNEL_ID = os.environ.get("1002097398855")  # Add your channel ID here
+CHANNEL_ID = os.environ.get("CHANNEL_ID")  # Add your channel ID here
 
 # Variable to keep track of total keys issued
 total_keys_issued = 0
@@ -25,12 +25,16 @@ Bot = Client(
 # Function to send start message with image and buttons
 async def send_start_message(update):
     # Send welcome message with options and image
-    welcome_message = "Welcome to the chat! Select an option below Join @ QTVinfo ❤️💒:"
+    welcome_message = "Welcome to the chat! Select an option below:"
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Get Key", callback_data="get_key"),
-                InlineKeyboardButton("Verify", callback_data="verify")
+                InlineKeyboardButton("Get Key 🔐", callback_data="get_key"),
+                InlineKeyboardButton("Verify ✅", callback_data="verify_user")
+            ],
+            [
+                InlineKeyboardButton("Check Status ⭐", callback_data="check_user_status"),
+                InlineKeyboardButton("Check Total Keys 👿", callback_data="check_total_keys")
             ]
         ]
     )
@@ -65,7 +69,7 @@ async def check_total_keys(update):
     await update.reply_text(f"Total keys issued: {total_keys_issued}")
 
 # Message handler
-@Bot.on_message(filters.private & filters.text)
+@Bot.on_message(filters.private & (filters.text | filters.command(["key"])))
 async def chat(bot, update):
     # Extract message text
     message_text = update.text.lower()
@@ -84,9 +88,7 @@ async def button(bot, update):
     callback_data = update.data
     chat_id = update.message.chat.id
     # Check which button is clicked
-    if callback_data == "get_key":
-        await send_key(update.message)
-    elif callback_data == "verify":
+    if callback_data == "check_keys":
         await check_total_keys(update.message)
 
 # Command handler
@@ -97,3 +99,4 @@ async def start(bot, update):
 
 # Bot ko run karein
 Bot.run()
+    
