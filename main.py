@@ -33,16 +33,6 @@ specific_words = {
 
 
 # List of emojis and their corresponding dangerous responses
-//dangerous_emojis = {
-    //"😈": "Teri himmat kaise hui mujhse panga lene ki?",
-   // "🔥": "Agar mujhe gussa dilaya toh teri life ka aakhri din hoga!",
-    //"💣": "Ye bomb nahi, tera future hai!",
-//  "🗡️": "Tera game over hone wala hai, chhuri mere haath mein hai!",
-    //"👿": "Mujhe nafrat hai, aur teri life bhi mujhse nafrat karegi!",
-    //"🤬": "Shor mat macha, varna tujhe dekh kar main angry hounga!",
-    //"💀": "Tu toh mar gaya beta, ab bas ghost ban ke ghoomta reh!"
-    
-//}
 dangerous_emojis = {
     "😈": "Teri himmat kaise hui mujhse panga lene ki?",
     "🔥": "Agar mujhe gussa dilaya toh teri life ka aakhri din hoga!",
