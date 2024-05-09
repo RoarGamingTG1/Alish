@@ -1,102 +1,63 @@
 import os
+import requests
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# Bot ke credentials
+# Bot credentials
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 API_ID = os.environ.get("API_ID")
 API_HASH = os.environ.get("API_HASH")
-CHANNEL_ID = os.environ.get("CHANNEL_ID")  # Add your channel ID here
 
-# Variable to keep track of total keys issued
-total_keys_issued = 0
-
-# Dictionary to store users and their generated keys
-user_keys = {}
-
-# Bot ko create karein
+# Bot creation
 Bot = Client(
-    "ChatBot",
+    "InstagramVideoBot",
     bot_token=BOT_TOKEN,
     api_id=API_ID,
     api_hash=API_HASH
 )
 
-# Function to send start message with image and buttons
-async def send_start_message(update):
-    # Send welcome message with options and image
-    welcome_message = "Welcome to the chat! Select an option below:"
-    keyboard = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("Get Key 🔐", callback_data="get_key"),
-                InlineKeyboardButton("Verify ✅", callback_data="verify_user")
-            ],
-            [
-                InlineKeyboardButton("Check Status ⭐", callback_data="check_user_status"),
-                InlineKeyboardButton("Check Total Keys 👿", callback_data="check_total_keys")
-            ]
-        ]
-    )
-    await update.reply_photo(
-        photo="https://telegra.ph/file/123022afb754372e3802e.jpg",  # Replace with your image URL
-        caption=welcome_message,
-        reply_markup=keyboard
-    )
-
-# Function to generate and send key
-async def send_key(update):
-    global total_keys_issued
-    user = update.from_user
-    if user.id in user_keys.values():
-        existing_key = next((key for key, value in user_keys.items() if value == user.id), None)
-        await update.reply_text(f"Your key is: {existing_key}")
-    else:
-        # Check if user has joined the channel
-        if await Bot.get_chat_member(int(CHANNEL_ID), user.id):
-            key = f"XALISHB{len(user_keys) + 1}"
-            user_keys[key] = user.id
-            total_keys_issued += 1  # Increment total keys issued
-            await update.reply_text(f"Your key is: {key}")
-        else:
-            # If user hasn't joined the channel, send a message to join
-            join_channel_message = "Please join our channel [here](https://t.me/QTVinfo) to get the key."
-            await update.reply_text(join_channel_message, disable_web_page_preview=True)
-
-# Function to check total keys issued
-async def check_total_keys(update):
-    global total_keys_issued
-    await update.reply_text(f"Total keys issued: {total_keys_issued}")
+# Function to extract video URL from Instagram link
+def extract_video_url(url):
+    try:
+        response = requests.get(url)
+        html_content = response.text
+        start_index = html_content.find("og:video") + 19
+        end_index = html_content.find('"/>', start_index)
+        video_url = html_content[start_index:end_index]
+        return video_url
+    except Exception as e:
+        print("Error extracting video URL:", e)
+        return None
 
 # Message handler
-@Bot.on_message(filters.private & (filters.text | filters.command(["key"])))
-async def chat(bot, update):
-    # Extract message text
-    message_text = update.text.lower()
-
-    # Check if the message contains the word "key"
-    if "key" in message_text:
-        await send_key(update)
+@Bot.on_message(filters.private & filters.regex(r"(?i)https?://(www\.)?instagram\.com/.+"))
+async def handle_instagram_link(bot, message):
+    # Extract video URL from Instagram link
+    video_url = extract_video_url(message.text)
+    if video_url:
+        # Download the video
+        video_file = f"{message.chat.id}_video.mp4"
+        try:
+            with requests.get(video_url, stream=True) as r:
+                r.raise_for_status()
+                with open(video_file, "wb") as f:
+                    for chunk in r.iter_content(chunk_size=8192):
+                        if chunk:
+                            f.write(chunk)
+            # Send the video file to the user
+            await bot.send_video(message.chat.id, video_file)
+        except Exception as e:
+            print("Error downloading or sending video:", e)
+            await message.reply_text("Error downloading or sending video. Please try again later.")
+        finally:
+            # Delete the video file
+            os.remove(video_file)
     else:
-        # Send welcome message with options
-        await send_start_message(update)
+        await message.reply_text("Sorry, unable to extract video URL from the provided link.")
 
-# Button handler
-@Bot.on_callback_query()
-async def button(bot, update):
-    # Extract callback data
-    callback_data = update.data
-    chat_id = update.message.chat.id
-    # Check which button is clicked
-    if callback_data == "check_keys":
-        await check_total_keys(update.message)
-
-# Command handler
+# Bot start message
 @Bot.on_message(filters.command(["start"]))
-async def start(bot, update):
-    # Call the function to send the start message with image and buttons
-    await send_start_message(update)
+async def start(bot, message):
+    await message.reply_text("Welcome to Instagram Video Downloader Bot! Send me an Instagram video link and I'll download it for you.")
 
-# Bot ko run karein
+# Run the bot
 Bot.run()
-    
