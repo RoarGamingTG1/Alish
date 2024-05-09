@@ -25,11 +25,12 @@ Bot = Client(
 # Function to send start message with image and buttons
 async def send_start_message(update):
     # Send welcome message with options and image
-    welcome_message = "Welcome to the chat! Select an option below Join @ QTVinfo ❤️💒:"
+    welcome_message = "Welcome to the chat! Select an option below to get your key or join our channel:"
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("Check Total Keys", callback_data="check_keys")
+                InlineKeyboardButton("Get Key", callback_data="get_key"),
+                InlineKeyboardButton("Join Channel", url="https://t.me/QTVinfo")
             ]
         ]
     )
@@ -58,24 +59,6 @@ async def send_key(update):
             join_channel_message = "Please join our channel [here](https://t.me/QTVinfo) to get the key."
             await update.reply_text(join_channel_message, disable_web_page_preview=True)
 
-# Function to check total keys issued
-async def check_total_keys(update):
-    global total_keys_issued
-    await update.reply_text(f"Total keys issued: {total_keys_issued}")
-
-# Message handler
-@Bot.on_message(filters.private & filters.text)
-async def chat(bot, update):
-    # Extract message text
-    message_text = update.text.lower()
-
-    # Check if the message contains the word "key"
-    if "key" in message_text:
-        await send_key(update)
-    else:
-        # Send welcome message with options
-        await send_start_message(update)
-
 # Button handler
 @Bot.on_callback_query()
 async def button(bot, update):
@@ -83,8 +66,8 @@ async def button(bot, update):
     callback_data = update.data
     chat_id = update.message.chat.id
     # Check which button is clicked
-    if callback_data == "check_keys":
-        await check_total_keys(update.message)
+    if callback_data == "get_key":
+        await send_key(update.message)
 
 # Command handler
 @Bot.on_message(filters.command(["start"]))
@@ -94,3 +77,4 @@ async def start(bot, update):
 
 # Bot ko run karein
 Bot.run()
+    
