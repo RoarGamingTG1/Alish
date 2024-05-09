@@ -21,24 +21,28 @@ specific_words = {
     "enemy": "Enemy? Mere liye toh tum sabhi enemies ho!",
     "victory": "Victory? Meri toh bas shuruaat hai, abhi toh game khela nahi shuru hua!",
     "defeat": "Defeat? Mere dictionary mein aise words nahi hote!",
-    "revenge": "Revenge? Mere pasandeeda hobby hai!"
+    "revenge": "Revenge? Mere pasandeeda hobby hai!",
+    "cheat": "Cheat? Mere cheats se teri game ki legitimacy ki death certificate ready hai!",
+    "aimbot": "Aimbot? Mere aimbot tera aim barbaad kar dega, jaise tera game!",
+    "wallhack": "Wallhack? Teri wallhack ki toh main wallah ho jaunga, bas meri entry hogi!",
+    "speedhack": "Speedhack? Mere speed se tu kaise bachega? Tu toh sirf ek speed bump hai mere raaste mein!",
+    "teleport": "Teleport? Haan, mere teleport karne se tera destination sirf destruction hoga!",
+    "godmode": "Godmode? Mere samne toh tu sirf mortal hai, koi godmode nahi!",
+    "bypass": "Bypass? Mere hacks se bypass karne ki koshish mat karna, warna tera bypass kaam nahi karega!"
 }
-sp_words = {
-    "aimbot": "Aimbot? Mere shots itne accurate hote hain ki tu sochega aimbot chal raha hai!",
-    "wallhack": "Wallhack? Mere saamne tu khud hi wall ho jaayega, teri positioning se hi pata chal jaata hai!",
-    "speedhack": "Speedhack? Mere reflexes itne fast hain ki tu saare speedhackers slow motion mein dikhne lagega!",
-    "teleport": "Teleport? Mere sath khel ke tu khud hi dusre server pe pahunch jayega!",
-    "godmode": "Godmode? Mere paas 'mad mode' hai, jisme tu bas mad hi ho jayega!",
-    "cheat": "Cheat? Mere saamne tu khud cheat sheet ban jaayega, jaise koi quiz ka paper solve kar raha ho!",
-    "hack": "Hack? Haan, main Mad bhai hoon! Mere hacks se tera game over hone wala hai, jaise kabhi shuru hi nahi hua!",
-    "bypass": "Bypass? Mere hacks se bypass karne ki koshish mat karna, warna tera bypass kaam nahi karega!",
-    "exploit": "Exploit? Mere liye toh teri gaming hi ek exploit hai!",
-    "mod": "Mod? Mere paas toh sab mod ke mods hain, tu bas dekh raha reh!",
-    "script": "Script? Mere paas itni saari scripts hain, ki tu confuse ho jaayega kis se bachega!",
-    "tool": "Tool? Mere toolkit mein sab kuch hai, teri bhi ulti ginti shuru ho gayi!",
-    "ban": "Ban? Mere paas koi ban nahi, bas teri gaming ki band bajane ke liye sab kuch!"
-}
+
+
 # List of emojis and their corresponding dangerous responses
+//dangerous_emojis = {
+    //"😈": "Teri himmat kaise hui mujhse panga lene ki?",
+   // "🔥": "Agar mujhe gussa dilaya toh teri life ka aakhri din hoga!",
+    //"💣": "Ye bomb nahi, tera future hai!",
+//  "🗡️": "Tera game over hone wala hai, chhuri mere haath mein hai!",
+    //"👿": "Mujhe nafrat hai, aur teri life bhi mujhse nafrat karegi!",
+    //"🤬": "Shor mat macha, varna tujhe dekh kar main angry hounga!",
+    //"💀": "Tu toh mar gaya beta, ab bas ghost ban ke ghoomta reh!"
+    
+//}
 dangerous_emojis = {
     "😈": "Teri himmat kaise hui mujhse panga lene ki?",
     "🔥": "Agar mujhe gussa dilaya toh teri life ka aakhri din hoga!",
@@ -46,8 +50,22 @@ dangerous_emojis = {
     "🗡️": "Tera game over hone wala hai, chhuri mere haath mein hai!",
     "👿": "Mujhe nafrat hai, aur teri life bhi mujhse nafrat karegi!",
     "🤬": "Shor mat macha, varna tujhe dekh kar main angry hounga!",
-    "💀": "Tu toh mar gaya beta, ab bas ghost ban ke ghoomta reh!"
+    "💀": "Tu toh mar gaya beta, ab bas ghost ban ke ghoomta reh!",
+    "🚀": "Ye spaceship nahi, tera crash site hai!",
+    "💥": "Ye explosion nahi, tera downfall hai!",
+    "🔪": "Chhuri mere haath mein hai, tera end mere control mein hai!",
+    "💔": "Ye dil nahi, teri defeat ka dard hai!",
+    "💩": "Tu toh ab bas waste material ban gaya hai mere liye!",
+    "👻": "Tu toh ab bas ghost ban ke ghoom raha hai, teri gaming ki soul chheen li gayi hai!",
+    "☠️": "Ab tu toh sirf ek skull hai mere liye, teri game over ki indication!",
+    "🧨": "Ye dynamite nahi, teri gaming career ka blast hai!",
+    "🔫": "Trigger mere haath mein hai, teri gaming ki death certificate ready hai!",
+    "💀": "Tu toh ab bas ek skeleton hai, teri gaming ka dead end hai!",
+    "🪓": "Ye axe nahi, teri gaming ki executioner hai, tu toh chop ho gaya!",
+    "🤡": "Tu toh ab bas ek joke hai mere liye, teri gaming ki comedy ka chapter closed hai!",
+    "👹": "Tere saamne toh main hi devil hoon, teri gaming ka shaitani end hai!"
 }
+
 
 # Bot ko create karein
 Bot = Client(
