@@ -58,7 +58,7 @@ Bot = Client(
 )
 
 # Message handler
-@Bot.on_message(filters.private)
+@Bot.on_message()
 async def chat(bot, update):
     # Extract message text
     message_text = update.text.lower()
