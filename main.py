@@ -8,7 +8,12 @@ API_HASH = "your_api_hash"
 BOT_TOKEN = "your_telegram_bot_token"
 
 # Create a bot instance
-bot = Client("InsultBot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+Bot = Client(
+    "insult",
+    bot_token=BOT_TOKEN,
+    api_id=API_ID,
+    api_hash=API_HASH
+)
 
 # Function to generate random insult
 def generate_insult():
