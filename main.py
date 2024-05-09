@@ -1,5 +1,6 @@
 import os
 import requests
+import wget
 from pyrogram import Client, filters
 
 # Bot credentials
@@ -37,12 +38,7 @@ async def handle_instagram_link(bot, message):
         # Download the video
         video_file = f"{message.chat.id}_video.mp4"
         try:
-            with requests.get(video_url, stream=True) as r:
-                r.raise_for_status()
-                with open(video_file, "wb") as f:
-                    for chunk in r.iter_content(chunk_size=8192):
-                        if chunk:
-                            f.write(chunk)
+            wget.download(video_url, out=video_file)
             # Send the video file to the user
             await bot.send_video(message.chat.id, video_file)
         except Exception as e:
