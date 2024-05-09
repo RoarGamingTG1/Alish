@@ -1,13 +1,14 @@
+from pyrogram import Client, filters
 import random
-import re  # Add this line to import the re module
+import re
 
 # Telegram bot token
 API_ID = "your_api_id"
 API_HASH = "your_api_hash"
-TOKEN = "your_telegram_bot_token"
+BOT_TOKEN = "your_telegram_bot_token"
 
 # Create a bot instance
-bot = Client("InsultBot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
+bot = Client("InsultBot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 # Function to generate random insult
 def generate_insult():
@@ -33,7 +34,7 @@ def praise_mad(bot, message):
     bot.send_message(message.chat.id, praise)
 
 # Handler for incoming messages
-@bot.on_message(filters.command("insult") | filters.regex(r"insult"))  # Removed re.IGNORECASE
+@bot.on_message(filters.command("insult") | filters.regex(r"insult", re.IGNORECASE))
 def send_insult(bot, message):
     insult = generate_insult()
     bot.send_message(message.chat.id, insult)
