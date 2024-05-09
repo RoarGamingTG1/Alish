@@ -1,68 +1,43 @@
-import os
-import requests
-from pyrogram import Client, filters
+import telebot
+import random
 
-# Bot credentials
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
-API_ID = os.environ.get("API_ID")
-API_HASH = os.environ.get("API_HASH")
+# Telegram bot token
+TOKEN = 'apna_telegram_bot_token_yahan_dalen'
 
-# Bot creation
-Bot = Client(
-    "InstagramVideoBot",
-    bot_token=BOT_TOKEN,
-    api_id=API_ID,
-    api_hash=API_HASH
-)
+# Create a bot instance
+bot = telebot.TeleBot(TOKEN)
 
-# Function to extract video URL from Instagram link
-def extract_video_url(url):
-    try:
-        response = requests.get(url)
-        html_content = response.text
-        start_index = html_content.find("og:video") + 19
-        end_index = html_content.find('"/>', start_index)
-        video_url = html_content[start_index:end_index]
-        return video_url
-    except Exception as e:
-        print("Error extracting video URL:", e)
-        return None
+# Function to handle incoming messages
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+    # Function to generate random response
+    response = generate_response()
+    bot.reply_to(message, response)
 
-# Function to download and send the video
-async def download_and_send_video(bot, message, video_url):
-    try:
-        # Download the video file
-        video_file = f"{message.chat.id}_video.mp4"
-        with requests.get(video_url, stream=True) as r:
-            r.raise_for_status()
-            with open(video_file, "wb") as f:
-                for chunk in r.iter_content(chunk_size=8192):
-                    f.write(chunk)
-        # Send the video file to the user
-        await bot.send_video(message.chat.id, video_file)
-    except Exception as e:
-        print("Error downloading or sending video:", e)
-        await message.reply_text("Error downloading or sending video. Please try again later.")
-    finally:
-        # Delete the video file
-        os.remove(video_file)
+# Function to generate random response
+def generate_response():
+    responses = [
+        "تمہیں لعنت دی گئی ہے! امید کرو کہ جہاں بھی جاؤ، نحوستی تمہارا پیچھا کرے گی۔",
+        "مبارک ہو! تم نے ایک سفری بوائے کی ٹکٹ جیت لی ہے جوزاہنم میں پہنچنے کا آرام کریں۔ اپنی دائمی عذاب کا لطف اٹھائیں!",
+        "خبردار! سایہ تمہیں دیکھ رہا ہے...",
+        "تمہارے سیاہ خفیہ اسرار میرے حوالے میں ہیں۔ آج رات اچھی طرح سونا...",
+        "تمہارا وقت ختم ہو رہا ہے...",
+        "ختم ہونے والا ہے...",
+        "میں تمہیں دیکھ رہا ہوں...",
+        "تمہارا مقدر بچ نہیں سکتا...",
+        "تمہاری مصیبت مجھے خوشی دیتی ہے... 😈",
+        "میں وہ تارا ہوں جو لوگوں کے دلوں میں چھپا ہے...",
+        "آپ کی خوابوں کا کھیل میں ہوں...",
+        "رات کو آپ کو سننے والے اسراری گپشپ وہ میں ہوں...",
+        "آپ صرف میرے بڑے منصوبے کا ایک پیشہ ہیں...",
+        "ہر قدم آپ کو اپنی تباہی کے قریب لاتا ہے...",
+        "روشنی نہیں ہے، صرف تاریکی ہے... 😈",
+        "خوش آمدید! میں آپ کو دوزخ کی مدد گار ہوں۔ آپ کا خیر مقدم ہے ۔ 😈",
+        "تیار ہو جاؤ! آپ کا مقدر میں لا رہا ہوں... 😈",
+        "کیا آپ کو بھی مجھ سے ڈر لگتا ہے؟ اچھا لگتا ہے! 😈",
+        "آپ کو کیا لگتا ہے؟ کوئی بچا پایے گا؟ بہت مضبوط! 😈"
+    ]
+    return random.choice(responses)
 
-# Message handler
-@Bot.on_message(filters.private & filters.regex(r"(?i)https?://(www\.)?instagram\.com/.+"))
-async def handle_instagram_link(bot, message):
-    # Extract video URL from Instagram link
-    video_url = extract_video_url(message.text)
-    if video_url:
-        # Download and send the video
-        await download_and_send_video(bot, message, video_url)
-    else:
-        await message.reply_text("Sorry, unable to extract video URL from the provided link.")
-
-# Bot start message
-@Bot.on_message(filters.command(["start"]))
-async def start(bot, message):
-    await message.reply_text("Welcome to Instagram Video Downloader Bot! Send me an Instagram video link and I'll download it for you.")
-
-# Run the bot
-Bot.run()
-    
+# Start the bot
+bot.polling()
