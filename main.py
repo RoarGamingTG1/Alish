@@ -1,6 +1,5 @@
 import os
 import requests
-import wget
 from pyrogram import Client, filters
 
 # Bot credentials
@@ -29,24 +28,33 @@ def extract_video_url(url):
         print("Error extracting video URL:", e)
         return None
 
+# Function to download and send the video
+async def download_and_send_video(bot, message, video_url):
+    try:
+        # Download the video file
+        video_file = f"{message.chat.id}_video.mp4"
+        with requests.get(video_url, stream=True) as r:
+            r.raise_for_status()
+            with open(video_file, "wb") as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        # Send the video file to the user
+        await bot.send_video(message.chat.id, video_file)
+    except Exception as e:
+        print("Error downloading or sending video:", e)
+        await message.reply_text("Error downloading or sending video. Please try again later.")
+    finally:
+        # Delete the video file
+        os.remove(video_file)
+
 # Message handler
 @Bot.on_message(filters.private & filters.regex(r"(?i)https?://(www\.)?instagram\.com/.+"))
 async def handle_instagram_link(bot, message):
     # Extract video URL from Instagram link
     video_url = extract_video_url(message.text)
     if video_url:
-        # Download the video
-        video_file = f"{message.chat.id}_video.mp4"
-        try:
-            wget.download(video_url, out=video_file)
-            # Send the video file to the user
-            await bot.send_video(message.chat.id, video_file)
-        except Exception as e:
-            print("Error downloading or sending video:", e)
-            await message.reply_text("Error downloading or sending video. Please try again later.")
-        finally:
-            # Delete the video file
-            os.remove(video_file)
+        # Download and send the video
+        await download_and_send_video(bot, message, video_url)
     else:
         await message.reply_text("Sorry, unable to extract video URL from the provided link.")
 
@@ -57,3 +65,4 @@ async def start(bot, message):
 
 # Run the bot
 Bot.run()
+    
