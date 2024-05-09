@@ -6,3 +6,4 @@ tqdm
 vosk
 yt-dlp
 telebot
+re
