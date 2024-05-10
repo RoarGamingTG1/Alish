@@ -19,44 +19,24 @@ async def delete_message(message):
 # Function to send threatening reply with random dangerous messages
 async def send_dangerous_reply(message):
     dangerous_messages = [
-        "⚠️ Mad bhai ke hatters, tumhari kismat aaj tumhare saath hai!",
-        "⚠️ Aaj Mad bhai ne tere naam ka ek special surprise bheja hai!",
-        "⚠️ Mad bhai ki permission ke bina kisi ke paas jana ab khatra hai!",
-        "⚠️ Mad bhai ke hatters, aaj ka din tumhare liye khaas hai!",
-        "⚠️ Aaj Mad bhai ne tumhare liye ek naya surprise tayaar kiya hai!",
-        "⚠️ Mad bhai ke hatters, ab tumhari aukaat aane wali hai!",
-        "⚠️ Mad bhai ki permission ke bina kisi ko hack karna, ab tumhari jaan ko khatra hai!",
-        "⚠️ Mad bhai ke hatters, aaj se tumhare liye bura waqt shuru hua hai!",
-        "⚠️ Aaj se Mad bhai ke hatters, tumhare peeche nahi, tumhare saamne bhaagna shuru karo!",
-        "⚠️ Mad bhai ke hatters, aaj ka din tumhare liye nightmare banne wala hai!",
-        "⚠️ Mad bhai ki permission ke bina kisi ke hack ka key share karna, ab tumhari maut ka faisla hai!"
+        " Mad bhai 👿 Busy In Exzam 💒!",
+        "Mad Bhai New Hack Mod Buht Jaldi Upload Krny Waly Hen 🙂!",
+        "Mad Bhai 😒 Koi Support Nhi Krta Dill Se Aysa Hack Or Kon Bana K dega 🙃!",
+        "Aaj Mad bhai ne phir se pubg lite ka system hi hill dala!",
+        "Mad Bhai Jo Bhi Hack use KerTy hen Wo Feedback Send Kro !",
+        "Mad Bhai Aaj Nhi aany Waly Wo Khahen Gai Hen 🙂!",
+        "Mad Bhai New Mod Banay Hai Pta Hai Buht OP hai 🫥 !"
     ]
     reply = random.choice(dangerous_messages)
-    await message.reply_text(reply)
-
-# Function to send random amusing messages
-async def send_amusing_reply(message):
-    amusing_messages = [
-        "😄 Mad bhai aaj bhi apne unique andaaz mein sabko entertain kar rahe hain!",
-        "😄 Aaj Mad bhai ne phir se sabko muskurahat di hai!",
-        "😄 Mad bhai ke aaj ke messages ne sabko hasi ke pahaad par le jaaya hai!",
-        "😄 Aaj bhi Mad bhai ne sabko maze kar diye hain apne messages ke saath!",
-        "😄 Mad bhai ke messages se aaj sab log khush hain!",
-        "😄 Aaj bhi Mad bhai ne apne creativity ka jadoo dikha diya hai!",
-        "😄 Mad bhai ke messages ne aaj sabko thoda sa hasa diya hai!"
-    ]
-    reply = random.choice(amusing_messages)
     await message.reply_text(reply)
 
 # Filter messages containing trigger words
 @app.on_message(filters.text & ~filters.me)
 async def reply_to_trigger_words(client, message):
-    trigger_words = ["mad bhai", "mad bhi", "mad bro"]
+    trigger_words = ["mad", "mad bhi", "mad bro"]
     for word in trigger_words:
         if word in message.text.lower():
             await send_dangerous_reply(message)
-            await asyncio.sleep(1)  # Add a slight delay
-            await send_amusing_reply(message)
             break
 
 # Run the bot
