@@ -36,8 +36,8 @@ specific_words = {
 
 # List of threatening messages with emojis
 threatening_messages = [
-    "Tumhein pata hai, main tumhara pata kar sakti hoon... 👁️‍🗨️",
-    "Agar tum mujhse kheloge, toh jaan se maar Dongi... 🔪😡",
+    "Tumhein pata hai, main tumhara pata kar sakta hoon... 👁️‍🗨️",
+    "Agar tum mujhse kheloge, toh jaan se maar doonga... 🔪😡",
     "Tumhare kadam uthane se pehle, soch lo, kyunki main hamesha tumhare saath hoon... 😈🔥",
     "Jab tak main yahan hoon, tum kabhi surakshit nahi ho... 👹💣",
     "Tumne mujhe gussa dilaya hai, ab bhugto... 😤💥",
@@ -68,34 +68,13 @@ async def respond_with_threatening_message_part1(bot, update):
     threatening_message = random.choice(threatening_messages)
     # Send the first part of the threatening message with the button
     keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("Bataon", callback_data="show_full_message")]])
-    message = await update.reply_text(threatening_message, reply_markup=keyboard)
-    # Schedule deletion of message after 30 seconds
-    await asyncio.sleep(30)
-    await message.delete()
+    await update.reply_text(threatening_message, reply_markup=keyboard)
 
 # Function to respond with threatening message part 2
 async def respond_with_threatening_message_part2(bot, update):
     # Select a random threatening message
     threatening_message = random.choice(threatening_messages)
     await update.reply_text(threatening_message)
-
-# Function to respond with inline buttons and an image
-async def respond_with_buttons_and_image(bot, update):
-    # Create inline keyboard with two buttons
-    keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("Download Key", url="https://example.com/key")],
-        [InlineKeyboardButton("Download Hack", url="https://example.com/hack")]
-    ])
-    # Send the photo with inline buttons
-    message = await bot.send_photo(
-        chat_id=update.chat.id,
-        photo="https://telegra.ph/file/2f44a7f4d8dfc9c8c8fb7.jpg",
-        caption="Choose an option to download:",
-        reply_markup=keyboard
-    )
-    # Schedule deletion of message after 30 seconds
-    await asyncio.sleep(30)
-    await message.delete()
 
 # Message handler
 @Bot.on_message(filters.text)
@@ -108,13 +87,7 @@ async def chat(bot, update):
         if word in message_text:
             await respond_romantically(bot, update)
             return
-        elif word == "key" or word == "hack":
-            await respond_with_buttons_and_image(bot, update)
-            return
-        elif "mad" in message_text:
-            await respond_with_fake_news(bot, update)
-            return
-        elif word == "threatening":
+        elif word == "mad":
             await respond_with_threatening_message_part1(bot, update)
             return
 
@@ -125,4 +98,4 @@ async def show_full_message(bot, update):
 
 # Bot ko run karein
 Bot.run()
-    
+                       
