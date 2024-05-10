@@ -2,7 +2,6 @@ import os
 import random
 import asyncio
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, InputMediaPhoto
 
 # Bot credentials
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
@@ -17,7 +16,7 @@ async def delete_message(message):
     await asyncio.sleep(3)
     await message.delete()
 
-# Function to send dangerous reply with random dangerous messages, inline buttons, and image
+# Function to send threatening reply with random dangerous messages
 async def send_dangerous_reply(message):
     dangerous_messages = [
         "⚠️ Mad bhai ke hatters, tumhari kismat aaj tumhare saath hai!",
@@ -33,30 +32,31 @@ async def send_dangerous_reply(message):
         "⚠️ Mad bhai ki permission ke bina kisi ke hack ka key share karna, ab tumhari maut ka faisla hai!"
     ]
     reply = random.choice(dangerous_messages)
-    keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("Hack Do", callback_data="hack")],
-        [InlineKeyboardButton("Download Key", url="https://example.com/download_key")],
-        [InlineKeyboardButton("Download Hack", url="https://example.com/download_hack")]
-    ])
-    # Add the URL of the image to be attached
-    media = InputMediaPhoto(media="https://telegra.ph/file/2f44a7f4d8dfc9c8c8fb7.jpg")
-    await message.reply_media_group(media=[media], reply_markup=keyboard, caption=reply)
+    await message.reply_text(reply)
 
-# Function to handle inline button callback
-@app.on_callback_query()
-async def handle_callback_query(client, query):
-    if query.data == "hack":
-        await query.answer("Hacking process initiated. Please wait for the download link.", show_alert=True)
-        # Here you can add the logic to start the hacking process
-        # Once the process is complete, you can send the download link to the user
+# Function to send random amusing messages
+async def send_amusing_reply(message):
+    amusing_messages = [
+        "😄 Mad bhai aaj bhi apne unique andaaz mein sabko entertain kar rahe hain!",
+        "😄 Aaj Mad bhai ne phir se sabko muskurahat di hai!",
+        "😄 Mad bhai ke aaj ke messages ne sabko hasi ke pahaad par le jaaya hai!",
+        "😄 Aaj bhi Mad bhai ne sabko maze kar diye hain apne messages ke saath!",
+        "😄 Mad bhai ke messages se aaj sab log khush hain!",
+        "😄 Aaj bhi Mad bhai ne apne creativity ka jadoo dikha diya hai!",
+        "😄 Mad bhai ke messages ne aaj sabko thoda sa hasa diya hai!"
+    ]
+    reply = random.choice(amusing_messages)
+    await message.reply_text(reply)
 
 # Filter messages containing trigger words
 @app.on_message(filters.text & ~filters.me)
 async def reply_to_trigger_words(client, message):
-    trigger_words = ["hack", "key", "download"]
+    trigger_words = ["mad bhai", "mad bhi", "mad bro"]
     for word in trigger_words:
         if word in message.text.lower():
             await send_dangerous_reply(message)
+            await asyncio.sleep(1)  # Add a slight delay
+            await send_amusing_reply(message)
             break
 
 # Run the bot
