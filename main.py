@@ -2,6 +2,7 @@ import os
 import random
 import asyncio
 from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # Bot credentials
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
@@ -11,6 +12,22 @@ API_HASH = os.environ.get("API_HASH")
 # Create Pyrogram client
 app = Client("WormGPT_Bot", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
 
+# Function to handle user questions and provide answers
+@app.on_message(filters.text & ~filters.me)
+async def reply_to_questions(client, message):
+    question = message.text.lower()
+    if "ali" in question:
+        # Create an inline keyboard with a button that opens the URL
+        reply_markup = InlineKeyboardMarkup(
+            [[InlineKeyboardButton("Access Hack", url="https://vt.tiktok.com/ZSYJhuTTM/")]]
+        )
+        # Reply with a message containing the inline keyboard and an attached image
+        await message.reply_photo(
+            photo="https://telegra.ph/file/8710c559a915747a6622a.jpg",  # Replace with the actual image URL
+            caption="Click the button below to access the hack:",
+            reply_markup=reply_markup
+        )
+    else:
 # Function to send threatening reply with random dangerous messages
 async def send_dangerous_reply(message):
     dangerous_messages = [
@@ -68,11 +85,7 @@ async def send_dangerous_reply(message):
 ]
 
     reply = random.choice(dangerous_messages)
-    sent_message = await message.reply_text(reply)
-    # Wait for 30 seconds before deleting the message
-    await asyncio.sleep(30)
-    # Delete the sent message
-    await sent_message.delete()
+    await message.reply_text(reply)
 
 # Filter messages containing trigger words
 @app.on_message(filters.text & ~filters.me)
@@ -83,32 +96,7 @@ async def reply_to_trigger_words(client, message):
             await send_dangerous_reply(message)
             break
 
-# Empty function for greeting words
-async def send_greeting_reply(message):
-    greeting_messages = [
-        "Hello there! How can I assist you today?",
-        "Hi! What can I do for you?",
-        "Hey! Do you need any help?",
-        "Hello! How may I help you?",
-        "Hi there! What can I assist you with?",
-        "Hey! Is there anything specific you'd like to know?",
-        "Hello! Feel free to ask me anything."
-    ]
-    reply = random.choice(greeting_messages)
-    await message.reply_text(reply)
-
-# Filter messages containing greeting words
-@app.on_message(filters.text & ~filters.me)
-async def reply_to_greeting_words(client, message):
-    greeting_words = ["hi", "hello", "how are you"]
-    for word in greeting_words:
-        if word in message.text.lower():
-            await send_greeting_reply(message)
-            break
-
 # Run the bot
 app.run()
 
-
-# Run the bot
-app.run()
+        
