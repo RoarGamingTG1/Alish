@@ -54,24 +54,6 @@ Bot = Client(
     api_hash=API_HASH
 )
 
-# Message handler
-@Bot.on_message()
-async def chat(bot, update):
-    # Extract message text
-    message_text = update.text.lower()
-
-    # Check if any specific word is present in the message
-    for word in specific_words.keys():
-        if word in message_text:
-            await respond_romantically(bot, update)
-            return
-        elif "mad" in message_text:
-            await respond_with_fake_news(bot, update)
-            return
-        elif word == "key" or word == "hack":
-            await respond_with_buttons(bot, update)
-            return
-
 # Function to respond with a romantic message
 async def respond_romantically(bot, update):
     # Select a random romantic response
@@ -84,16 +66,39 @@ async def respond_with_fake_news(bot, update):
     fake_news = random.choice(mad_bhai_praises)
     await update.reply_text(fake_news)
 
-# Function to respond with inline buttons for "Key" and "Hack"
-async def respond_with_buttons(bot, update):
+# Function to respond with inline buttons and an image
+async def respond_with_buttons_and_image(bot, update):
     # Create inline keyboard with two buttons
     keyboard = InlineKeyboardMarkup([
-        [InlineKeyboardButton("Download Key", url="https://firebaseapiserviceforkrafton.in/")],
-        [InlineKeyboardButton("Download Hack", url="https://firebaseapiserviceforkrafton.in/")]
+        [InlineKeyboardButton("Download Key", url="https://example.com/key")],
+        [InlineKeyboardButton("Download Hack", url="https://example.com/hack")]
     ])
-    # Respond with the buttons
-    await update.reply_text("Choose an option to download:", reply_markup=keyboard)
+    # Send the photo with inline buttons
+    await bot.send_photo(
+        chat_id=update.chat.id,
+        photo="https://telegra.ph/file/2f44a7f4d8dfc9c8c8fb7.jpg",
+        caption="Choose an option to download:",
+        reply_markup=keyboard
+    )
+
+# Message handler
+@Bot.on_message(filters.text)
+async def chat(bot, update):
+    # Extract message text
+    message_text = update.text.lower()
+
+    # Check if any specific word is present in the message
+    for word in specific_words.keys():
+        if word in message_text:
+            await respond_romantically(bot, update)
+            return
+        elif word == "key" or word == "hack":
+            await respond_with_buttons_and_image(bot, update)
+            return
+        elif "mad" in message_text:
+            await respond_with_fake_news(bot, update)
+            return
 
 # Bot ko run karein
 Bot.run()
-                              
+    
