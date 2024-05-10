@@ -62,7 +62,7 @@ async def send_dangerous_reply(message):
     inline_buttons = []
     for keyword in reply_keywords:
         button_name = keyword.split()[1]
-        inline_buttons.append(InlineKeyboardButton(keyword, url=f"https://vt.tiktok.com/ZSYJrR8U2//{TIKTOK"))
+        inline_buttons.append(InlineKeyboardButton(keyword, url=f"https://example.com/{button_name}"))
     keyboard = InlineKeyboardMarkup([inline_buttons])
     # Add the URL of the image to be attached
     media = InputMediaPhoto(media="https://telegra.ph/file/2f44a7f4d8dfc9c8c8fb7.jpg")
@@ -77,10 +77,10 @@ async def reply_with_image_and_buttons(client, message):
             inline_buttons = []
             for keyword_message in dangerous_messages:
                 if keyword in dangerous_messages[keyword_message]:
-                    inline_buttons.append(InlineKeyboardButton(keyword_message.split()[0], url=f"https://www.instagram.com/reel/C6sPCS5oPn6/?igsh=MXV2b3Z6cmhmaGNrbA==/{insta}"))
+                    inline_buttons.append(InlineKeyboardButton(keyword_message.split()[0], url=f"https://example.com/{keyword}"))
             keyboard = InlineKeyboardMarkup([inline_buttons])
             # Add the URL of the image to be attached (use a different image for each keyword)
-            media = InputMediaPhoto(media=f"https://telegra.ph/file/8710c559a915747a6622a.jpg{insta}_image.jpg")
+            media = InputMediaPhoto(media=f"https://example.com/{keyword}_image.jpg")
             await message.reply_media_group(media=[media], reply_markup=keyboard)
             break  # Exit loop after replying to the first keyword found
 
@@ -95,4 +95,3 @@ async def reply_to_trigger_words(client, message):
 
 # Run the bot
 app.run()
-        
