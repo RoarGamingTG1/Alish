@@ -2,7 +2,8 @@ import os
 import random
 import asyncio
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
 # Bot credentials
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 API_ID = os.environ.get("API_ID")
@@ -84,6 +85,9 @@ async def reply_to_trigger_words(client, message):
         if word in message.text.lower():
             await send_dangerous_reply(message)
             break
+
+# Function to handle user questions and provide answers
+@app.on_message(filters.text & ~filters.me)
 async def reply_to_questions(client, message):
     question = message.text.lower()
     if "ali" in question:
@@ -100,3 +104,4 @@ async def reply_to_questions(client, message):
 
 # Run the bot
 app.run()
+
