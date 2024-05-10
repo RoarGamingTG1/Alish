@@ -36,8 +36,8 @@ specific_words = {
 
 # List of threatening messages with emojis
 threatening_messages = [
-    "Tumhein pata hai, main tumhara pata kar sakta hoon... 👁️‍🗨️",
-    "Agar tum mujhse kheloge, toh jaan se maar doonga... 🔪😡",
+    "Tumhein pata hai, main tumhara pata kar sakti hoon... 👁️‍🗨️",
+    "Agar tum mujhse kheloge, toh jaan se maar Dongi... 🔪😡",
     "Tumhare kadam uthane se pehle, soch lo, kyunki main hamesha tumhare saath hoon... 😈🔥",
     "Jab tak main yahan hoon, tum kabhi surakshit nahi ho... 👹💣",
     "Tumne mujhe gussa dilaya hai, ab bhugto... 😤💥",
@@ -68,7 +68,10 @@ async def respond_with_threatening_message_part1(bot, update):
     threatening_message = random.choice(threatening_messages)
     # Send the first part of the threatening message with the button
     keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("Bataon", callback_data="show_full_message")]])
-    await update.reply_text(threatening_message, reply_markup=keyboard)
+    message = await update.reply_text(threatening_message, reply_markup=keyboard)
+    # Schedule deletion of message after 30 seconds
+    await asyncio.sleep(30)
+    await message.delete()
 
 # Function to respond with threatening message part 2
 async def respond_with_threatening_message_part2(bot, update):
@@ -84,7 +87,7 @@ async def respond_with_buttons_and_image(bot, update):
         [InlineKeyboardButton("Download Hack", url="https://example.com/hack")]
     ])
     # Send the photo with inline buttons
-    await bot.send_photo(
+    message = await bot.send_photo(
         chat_id=update.chat.id,
         photo="https://telegra.ph/file/2f44a7f4d8dfc9c8c8fb7.jpg",
         caption="Choose an option to download:",
@@ -92,7 +95,7 @@ async def respond_with_buttons_and_image(bot, update):
     )
     # Schedule deletion of message after 30 seconds
     await asyncio.sleep(30)
-    await update.delete()
+    await message.delete()
 
 # Message handler
 @Bot.on_message(filters.text)
