@@ -1,5 +1,6 @@
 import os
 import random
+import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -33,17 +34,18 @@ specific_words = {
     "mad": "Mad? Haan, main bilkul Mad hoon, lekin sirf tumhare pyaar mein! 🤪❤️",
 }
 
-# List of fake news praising Mad Bhai with emojis
-mad_bhai_praises = [
-    "Mad Bhai aaj USA gaye hain, aaj busy hain, aaj ek celebrity se milne gaye hain! 🇺🇸👨‍💼🌟",
-    "Mad Bhai ne aaj ek naya hack banaya hai, aur sab ko hairat mein daal diya hai! 💻🔥😲",
-    "Aaj Mad Bhai ne ek naya record banaya hai, sabse tezi se hacking karne mein! 🏆💨💻",
-    "Mad Bhai aaj ek naya game discover kiya hai, jise koi hack nahi kar sakta! 🎮🔓😎",
-    "Mad Bhai ne aaj ek naya project start kiya hai, jismein sabko kuch naya sikhne ko milega! 🚀📘🤓",
-    "Aaj Mad Bhai ne ek naya software launch kiya hai, jo sabki gaming experience ko improve karega! 🎉🕹️🚀",
-    "Mad Bhai ko aaj ek naya award mila hai, unki hacking skills ke liye! 🏅💻👨‍💻",
-    "Aaj Mad Bhai ne ek naya challenge accept kiya hai, aur woh bina kisi mistake ke pura kar rahe hain! 🏋️‍♂️🎯😎",
-    "Mad Bhai aaj ek naye record banaye hain, sabse jyada online matches jeet kar! 🎮🏆🥇"
+# List of threatening messages with emojis
+threatening_messages = [
+    "Tumhein pata hai, main tumhara pata kar sakta hoon... 👁️‍🗨️",
+    "Agar tum mujhse kheloge, toh jaan se maar doonga... 🔪😡",
+    "Tumhare kadam uthane se pehle, soch lo, kyunki main hamesha tumhare saath hoon... 😈🔥",
+    "Jab tak main yahan hoon, tum kabhi surakshit nahi ho... 👹💣",
+    "Tumne mujhe gussa dilaya hai, ab bhugto... 😤💥",
+    "Tumhein lagta hai tum mujhse bach sakte ho? Galatfehmi mat rakhna... 🚫🔫",
+    "Agar tumne mere pyaar mein dhokha diya, toh yaad rakhna, main hamesha tumhare peeche hoon... 💔💀",
+    "Tumhein chhodunga nahi, chahein kitna bhi bhaag lo... 🏃‍♂️🔥",
+    "Yeh jo tum sochte ho, yeh galatfehmi hai ki tum surakshit ho... 🚷🔥",
+    "Tumhein nahi lagta tum mujhse bach sakte ho, na? Yakeen maano, nahi bach sakte... 😈🔪"
 ]
 
 # Bot ko create karein
@@ -60,11 +62,19 @@ async def respond_romantically(bot, update):
     response = random.choice(list(specific_words.values()))
     await update.reply_text(response)
 
-# Function to respond with fake news praising Mad Bhai
-async def respond_with_fake_news(bot, update):
-    # Select a random fake news praising Mad Bhai
-    fake_news = random.choice(mad_bhai_praises)
-    await update.reply_text(fake_news)
+# Function to respond with threatening message part 1
+async def respond_with_threatening_message_part1(bot, update):
+    # Select a random threatening message
+    threatening_message = random.choice(threatening_messages)
+    # Send the first part of the threatening message with the button
+    keyboard = InlineKeyboardMarkup([[InlineKeyboardButton("Bataon", callback_data="show_full_message")]])
+    await update.reply_text(threatening_message, reply_markup=keyboard)
+
+# Function to respond with threatening message part 2
+async def respond_with_threatening_message_part2(bot, update):
+    # Select a random threatening message
+    threatening_message = random.choice(threatening_messages)
+    await update.reply_text(threatening_message)
 
 # Function to respond with inline buttons and an image
 async def respond_with_buttons_and_image(bot, update):
@@ -80,6 +90,9 @@ async def respond_with_buttons_and_image(bot, update):
         caption="Choose an option to download:",
         reply_markup=keyboard
     )
+    # Schedule deletion of message after 30 seconds
+    await asyncio.sleep(30)
+    await update.delete()
 
 # Message handler
 @Bot.on_message(filters.text)
@@ -98,6 +111,14 @@ async def chat(bot, update):
         elif "mad" in message_text:
             await respond_with_fake_news(bot, update)
             return
+        elif word == "threatening":
+            await respond_with_threatening_message_part1(bot, update)
+            return
+
+# Callback handler for showing full threatening message
+@Bot.on_callback_query(filters.regex("^show_full_message$"))
+async def show_full_message(bot, update):
+    await respond_with_threatening_message_part2(bot, update)
 
 # Bot ko run karein
 Bot.run()
