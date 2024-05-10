@@ -77,7 +77,7 @@ async def send_dangerous_reply(message):
 # Filter messages containing trigger words
 @app.on_message(filters.text & ~filters.me)
 async def reply_to_trigger_words(client, message):
-    trigger_words = ["mad", "mad bhi", "mad bro"]
+    trigger_words = ["Love", "Gf", ,"gf","Dosti" ,"Girlfriend"]
     for word in trigger_words:
         if word in message.text.lower():
             await send_dangerous_reply(message)
