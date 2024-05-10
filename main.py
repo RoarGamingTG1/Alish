@@ -27,7 +27,7 @@ async def reply_to_questions(client, message):
             caption="Click the button below to access the hack:",
             reply_markup=reply_markup
         )
-    else:
+
 # Function to send threatening reply with random dangerous messages
 async def send_dangerous_reply(message):
     dangerous_messages = [
