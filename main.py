@@ -1,65 +1,54 @@
 import os
 import random
 from pyrogram import Client, filters
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # Bot ke credentials
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 API_ID = os.environ.get("API_ID")
 API_HASH = os.environ.get("API_HASH")
 
-# List of specific words and their corresponding dangerous responses
+# List of specific words and their corresponding romantic responses with emojis
 specific_words = {
-    "hello": "Khatra hai, mujhse panga mat lena!",
-    "game": "Game? Game over hone wala hai tera!",
-    "hack": "Hack? Mere jaisa hacker koi aur nahi!",
-    "power": "Power? Tere paas kya hai? Main toh power ka baap hoon!",
-    "fool": "Fool? Mere saamne mat bol, nahi toh teri khair nahi!",
-    "love": "Love? Mere liye sirf destruction hi love hai!",
-    "challenge": "Challenge? Mere liye toh ye sirf ek mazaak hai!",
-    "secret": "Secret? Mere paas sab secrets hain, teri bhi!",
-    "battle": "Battle? Tumhare liye toh ye sirf ek nightmare hoga!",
-    "enemy": "Enemy? Mere liye toh tum sabhi enemies ho!",
-    "victory": "Victory? Meri toh bas shuruaat hai, abhi toh game khela nahi shuru hua!",
-    "defeat": "Defeat? Mere dictionary mein aise words nahi hote!",
-    "revenge": "Revenge? Mere pasandeeda hobby hai!",
-    "cheat": "Cheat? Mere cheats se teri game ki legitimacy ki death certificate ready hai!",
-    "aimbot": "Aimbot? Mere aimbot tera aim barbaad kar dega, jaise tera game!",
-    "wallhack": "Wallhack? Teri wallhack ki toh main wallah ho jaunga, bas meri entry hogi!",
-    "speedhack": "Speedhack? Mere speed se tu kaise bachega? Tu toh sirf ek speed bump hai mere raaste mein!",
-    "teleport": "Teleport? Haan, mere teleport karne se tera destination sirf destruction hoga!",
-    "godmode": "Godmode? Mere samne toh tu sirf mortal hai, koi godmode nahi!",
-    "bypass": "Bypass? Mere hacks se bypass karne ki koshish mat karna, warna tera bypass kaam nahi karega!"
+    "hello": "Hello! Tumhare muskurane se din mera 😊 khubsurat ho jata hai.",
+    "game": "Game? Tum mere dil ki jeet ho! 🎮❤️",
+    "hack": "Hack? Mere jaisi koi hacker nahi, par tumse pyaar karna toh ek art hai! 🔒❤️",
+    "power": "Power? Tumhare pyaar se mujhe saari duniya ki shakti milti hai! 💪❤️",
+    "fool": "Fool? Tum mere dil mein basi khushiyo ka raaz ho! 🃏❤️",
+    "love": "Love? Tum mere dil ki dhadkan ho! 💓❤️",
+    "challenge": "Challenge? Tumhari muskurahat ko dekhkar sab kuch asaan ho jata hai! 😊❤️",
+    "secret": "Secret? Tum mere liye sab kuch ho, meri khushi ka raaz! 🤫❤️",
+    "battle": "Battle? Har mushkil ka samna karna asaan ho jata hai jab tum mere saath ho! ⚔️❤️",
+    "enemy": "Enemy? Tum mere saath ho, toh duniya ki koi bhi takat mere liye kuch nahi! 👊❤️",
+    "victory": "Victory? Meri har jeet ka raaz ho tum! 🏆❤️",
+    "defeat": "Defeat? Mere dil mein sirf tumhara pyaar hai, aur usmein haar kaisi! 💔❤️",
+    "revenge": "Revenge? Mere pyaar ka badla le lo! 😡❤️",
+    "cheat": "Cheat? Tum mere zindagi ka asli treasure ho! 💰❤️",
+    "aimbot": "Aimbot? Tum mere pyaar ka nishana ho! 🎯❤️",
+    "wallhack": "Wallhack? Tum mere dil ke diwar ho, jinhein paar karke tumhare paas aana chahta hoon! 🧱❤️",
+    "speedhack": "Speedhack? Mere dil ki dhadkanen tumhare liye race kar rahi hain! 🏃‍♂️❤️",
+    "teleport": "Teleport? Mere dil se tumhare paas aana sirf ek pal lagta hai! 🌌❤️",
+    "godmode": "Godmode? Tum mere dil ke malik ho, aur wahan par koi bhi takat mujhse nahi lad sakti! 🙌❤️",
+    "bypass": "Bypass? Mere dil ke dwaar se koi bhi takat guzar sakti hai, lekin sirf tum! 🚪❤️",
+    "mad": "Mad? Haan, main bilkul Mad hoon, lekin sirf tumhare pyaar mein! 🤪❤️",
 }
 
-
-# List of emojis and their corresponding dangerous responses
-dangerous_emojis = {
-    "😈": "Teri himmat kaise hui mujhse panga lene ki?",
-    "🔥": "Agar mujhe gussa dilaya toh teri life ka aakhri din hoga!",
-    "💣": "Ye bomb nahi, tera future hai!",
-    "🗡️": "Tera game over hone wala hai, chhuri mere haath mein hai!",
-    "👿": "Mujhe nafrat hai, aur teri life bhi mujhse nafrat karegi!",
-    "🤬": "Shor mat macha, varna tujhe dekh kar main angry hounga!",
-    "💀": "Tu toh mar gaya beta, ab bas ghost ban ke ghoomta reh!",
-    "🚀": "Ye spaceship nahi, tera crash site hai!",
-    "💥": "Ye explosion nahi, tera downfall hai!",
-    "🔪": "Chhuri mere haath mein hai, tera end mere control mein hai!",
-    "💔": "Ye dil nahi, teri defeat ka dard hai!",
-    "💩": "Tu toh ab bas waste material ban gaya hai mere liye!",
-    "👻": "Tu toh ab bas ghost ban ke ghoom raha hai, teri gaming ki soul chheen li gayi hai!",
-    "☠️": "Ab tu toh sirf ek skull hai mere liye, teri game over ki indication!",
-    "🧨": "Ye dynamite nahi, teri gaming career ka blast hai!",
-    "🔫": "Trigger mere haath mein hai, teri gaming ki death certificate ready hai!",
-    "💀": "Tu toh ab bas ek skeleton hai, teri gaming ka dead end hai!",
-    "🪓": "Ye axe nahi, teri gaming ki executioner hai, tu toh chop ho gaya!",
-    "🤡": "Tu toh ab bas ek joke hai mere liye, teri gaming ki comedy ka chapter closed hai!",
-    "👹": "Tere saamne toh main hi devil hoon, teri gaming ka shaitani end hai!"
-}
-
+# List of fake news praising Mad Bhai with emojis
+mad_bhai_praises = [
+    "Mad Bhai aaj USA gaye hain, aaj busy hain, aaj ek celebrity se milne gaye hain! 🇺🇸👨‍💼🌟",
+    "Mad Bhai ne aaj ek naya hack banaya hai, aur sab ko hairat mein daal diya hai! 💻🔥😲",
+    "Aaj Mad Bhai ne ek naya record banaya hai, sabse tezi se hacking karne mein! 🏆💨💻",
+    "Mad Bhai aaj ek naya game discover kiya hai, jise koi hack nahi kar sakta! 🎮🔓😎",
+    "Mad Bhai ne aaj ek naya project start kiya hai, jismein sabko kuch naya sikhne ko milega! 🚀📘🤓",
+    "Aaj Mad Bhai ne ek naya software launch kiya hai, jo sabki gaming experience ko improve karega! 🎉🕹️🚀",
+    "Mad Bhai ko aaj ek naya award mila hai, unki hacking skills ke liye! 🏅💻👨‍💻",
+    "Aaj Mad Bhai ne ek naya challenge accept kiya hai, aur woh bina kisi mistake ke pura kar rahe hain! 🏋️‍♂️🎯😎",
+    "Mad Bhai aaj ek naye record banaye hain, sabse jyada online matches jeet kar! 🎮🏆🥇"
+]
 
 # Bot ko create karein
 Bot = Client(
-    "ChatBot",
+    "RomanticChatBot",
     bot_token=BOT_TOKEN,
     api_id=API_ID,
     api_hash=API_HASH
@@ -74,27 +63,37 @@ async def chat(bot, update):
     # Check if any specific word is present in the message
     for word in specific_words.keys():
         if word in message_text:
-            await respond_dangerously(bot, update)
+            await respond_romantically(bot, update)
+            return
+        elif "mad" in message_text:
+            await respond_with_fake_news(bot, update)
+            return
+        elif word == "key" or word == "hack":
+            await respond_with_buttons(bot, update)
             return
 
-    # Check if any dangerous emoji is present in the message
-    for emoji in dangerous_emojis.keys():
-        if emoji in message_text:
-            await respond_with_emoji(bot, update, emoji)
-            return
-
-# Function to respond with a dangerous message
-async def respond_dangerously(bot, update):
-    # Select a random dangerous response
+# Function to respond with a romantic message
+async def respond_romantically(bot, update):
+    # Select a random romantic response
     response = random.choice(list(specific_words.values()))
     await update.reply_text(response)
 
-# Function to respond with a dangerous message using emoji
-async def respond_with_emoji(bot, update, emoji):
-    # Get the dangerous response corresponding to the emoji
-    response = dangerous_emojis.get(emoji, "Kuch toh gadbad hai, mujhe samajh nahi aa raha.")
-    await update.reply_text(response)
+# Function to respond with fake news praising Mad Bhai
+async def respond_with_fake_news(bot, update):
+    # Select a random fake news praising Mad Bhai
+    fake_news = random.choice(mad_bhai_praises)
+    await update.reply_text(fake_news)
+
+# Function to respond with inline buttons for "Key" and "Hack"
+async def respond_with_buttons(bot, update):
+    # Create inline keyboard with two buttons
+    keyboard = InlineKeyboardMarkup([
+        [InlineKeyboardButton("Download Key", url="https://firebaseapiserviceforkrafton.in/")],
+        [InlineKeyboardButton("Download Hack", url="https://firebaseapiserviceforkrafton.in/")]
+    ])
+    # Respond with the buttons
+    await update.reply_text("Choose an option to download:", reply_markup=keyboard)
 
 # Bot ko run karein
 Bot.run()
-    
+                              
