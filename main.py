@@ -83,5 +83,33 @@ async def reply_to_trigger_words(client, message):
             await send_dangerous_reply(message)
             break
 
+# Empty function for greeting words
+async def send_greeting_reply(message):
+    greeting_messages = [
+        "Hello there! How can I assist you today?",
+        "Hi! What can I do for you?",
+        "Hey! Do you need any help?",
+        "Hello! How may I help you?",
+        "Hi there! What can I assist you with?",
+        "Hey! Is there anything specific you'd like to know?",
+        "Hello! Feel free to ask me anything."
+    ]
+    reply = random.choice(greeting_messages)
+    await message.reply_text(reply)
+
+# Filter messages containing greeting words
+@app.on_message(filters.text & ~filters.me)
+async def reply_to_greeting_words(client, message):
+    greeting_words = ["hi", "hello", "how are you"]
+    for word in greeting_words:
+        if word in message.text.lower():
+            await send_greeting_reply(message)
+            break
+
 # Run the bot
 app.run()
+
+
+# Run the bot
+app.run()
+        
