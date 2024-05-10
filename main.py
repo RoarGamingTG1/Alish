@@ -79,5 +79,15 @@ async def reply_to_trigger_words(client, message):
             await send_dangerous_reply(message)
             break
 
+
+async def send_dangerous_reply(message):
+    dangerous_messages = [...]
+    reply = random.choice(dangerous_messages)
+    sent_message = await message.reply_text(reply)
+    # Wait for 30 seconds before deleting the message
+    await asyncio.sleep(30)
+    # Delete the sent message
+    await sent_message.delete()
+    
 # Run the bot
 app.run()
