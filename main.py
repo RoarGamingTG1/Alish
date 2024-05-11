@@ -54,13 +54,13 @@ async def reply_to_messages(client, message):
     else:
         # Check for trigger words
         trigger_words = {
-            "word1": {
-                "image_url": "https://telegra.ph/file/0c5cab3ac6f9543497959.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/StarModTG",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/StarModTG",
-                "caption": "✅✅✅💒💒"
+            "Mod": {
+                "image_url": "https://telegra.ph/file/f6be52baa496065e85862.jpg",
+                "button1_text": "MOD HACK ✅",
+                "button1_url": "https://t.me/StarModz/4224",
+                "button2_text": "MOD OBB 🌟",
+                "button2_url": "https://t.me/StarModz/4222",
+                "caption": "StarModz Optimised Version No Crash and Fully SmoothSupport Android 9-14 (64 Bit 🫥👻"
             },
             "word2": {
                 "image_url": "https://telegra.ph/file/8710c559a915747a6622a.jpg",
@@ -107,14 +107,20 @@ async def reply_to_messages(client, message):
 @app.on_message(filters.text & ~filters.me)
 async def handle_messages(client, message):
     if message.text.lower() == "what is your favorite color?":
-        await message.reply_text("My favorite color is blue!")
+        sent_message = await message.reply_text("My favorite color is blue!")
     elif message.text.lower() == "how are you?":
-        await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
+        sent_message = await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
     elif message.text.lower() == "who created you?":
-        await message.reply_text("I was created by a team of developers at OpenAI.")
+        sent_message = await message.reply_text("I was created by a team of developers at OpenAI.")
     else:
-        await reply_to_messages(client, message)
+        sent_message = await reply_to_messages(client, message)
+    
+    # Wait for 30 seconds before deleting the message
+    await asyncio.sleep(30)
+
+    # Delete the sent message
+    await sent_message.delete()
 
 # Run the bot
 app.run()
-        
+            
