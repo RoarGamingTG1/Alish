@@ -32,7 +32,7 @@ async def send_dangerous_reply(message):
 # Function to handle user questions and provide answers
 async def reply_to_messages(client, message):
     question = message.text.lower()
-    if "Key" in question:
+    if "key" in question:
         # Create an inline keyboard with two buttons, each with a different URL
         reply_markup = InlineKeyboardMarkup(
             [
@@ -54,23 +54,7 @@ async def reply_to_messages(client, message):
     else:
         # Check for trigger words
         trigger_words = {
-            "word1": {
-                "image_url": "https://telegra.ph/file/0c5cab3ac6f9543497959.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/StarModTG",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/StarModTG",
-                "caption": "✅✅✅💒💒"
-            },
-            "word2": {
-                "image_url": "https://telegra.ph/file/8710c559a915747a6622a.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/MadHackerTG",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/MadHackerTG",
-                "caption": "😋😋😋😋😋"
-            },
-            "Mod": {
+            "mod": {
                 "image_url": "https://example.com/mod.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://example.com/mod1",
@@ -86,7 +70,7 @@ async def reply_to_messages(client, message):
                 "button2_url": "https://example.com/obb2",
                 "caption": "obb caption"
             },
-            "Hack": {
+            "hack": {
                 "image_url": "https://example.com/hack.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://example.com/hack1",
@@ -94,7 +78,7 @@ async def reply_to_messages(client, message):
                 "button2_url": "https://example.com/hack2",
                 "caption": "Hack caption"
             },
-            "Use": {
+            "use": {
                 "image_url": "https://example.com/use.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://example.com/use1",
@@ -102,7 +86,7 @@ async def reply_to_messages(client, message):
                 "button2_url": "https://example.com/use2",
                 "caption": "Use caption"
             },
-            "Mt": {
+            "mt": {
                 "image_url": "https://example.com/mt.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://example.com/mt1",
@@ -110,7 +94,7 @@ async def reply_to_messages(client, message):
                 "button2_url": "https://example.com/mt2",
                 "caption": "Mt caption"
             },
-            "Editor": {
+            "editor": {
                 "image_url": "https://example.com/editor.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://example.com/editor1",
@@ -118,7 +102,7 @@ async def reply_to_messages(client, message):
                 "button2_url": "https://example.com/editor2",
                 "caption": "Editor caption"
             },
-            "Mad": {
+            "mad": {
                 "image_url": "https://example.com/mad.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://example.com/mad1",
@@ -126,7 +110,7 @@ async def reply_to_messages(client, message):
                 "button2_url": "https://example.com/mad2",
                 "caption": "Mad caption"
             },
-            "Rz": {
+            "rz": {
                 "image_url": "https://example.com/rz.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://example.com/rz1",
@@ -134,7 +118,7 @@ async def reply_to_messages(client, message):
                 "button2_url": "https://example.com/rz2",
                 "caption": "Rz caption"
             },
-            "Ramjan": {
+            "ramjan": {
                 "image_url": "https://example.com/ramjan.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://example.com/ramjan1",
