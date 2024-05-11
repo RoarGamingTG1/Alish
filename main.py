@@ -128,8 +128,6 @@ async def reply_to_non_trigger_messages(client, message):
         sent_message = await message.reply_text("Hello 👋.")
     elif message.text.lower() == "how are you":
         sent_message = await message.reply_text("Men Thik hon Ap Sunao 👻 🫥.")
-        elif message.text.lower() == "gf banogi.":
-        sent_message = await message.reply_text("Pyasy insan Men ayk Bot hon or AtangWadion Ki koi prem kahni Nhi hoti 😡😡.")
         elif message.text.lower() == "rose":
         sent_message = await message.reply_text("rose 🌹 tang nhi kro nhi To ban Kardongi 🤬.")
     elif message.text.lower() == "Fash speed":
