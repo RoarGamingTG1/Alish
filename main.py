@@ -49,13 +49,13 @@ async def reply_to_mod_messages(message):
             "button2_url": "https://t.me/Obb2",
             "image_url": "https://telegra.ph/file/8710c559a915747a6622a.jpg"
         },
-        "key": {
+        "ali": {
             "caption": "Caption for Key",
             "button1_text": "Button 1",
-            "button1_url": "https://t.me/Key1",
+            "button1_url": "https://t.me/Mod1",
             "button2_text": "Button 2",
-            "button2_url": "https://t.me/Key2",
-            "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg"
+            "button2_url": "https://t.me/Mod1",
+            "image_url": "https://telegra.ph/file/f6be52baa496065e85862.jpg"
         },
         # Add more trigger words with their respective details
     }
@@ -112,4 +112,4 @@ async def handle_messages(client, message):
 
 # Run the bot
 app.run()
-        
+            
