@@ -87,7 +87,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "mod5": {
-                "image_url": "https://telegra.ph/file/4f17b51c0b5f23b858c7a.jpg",
+                "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Mod5",
                 "button2_text": "Button 2",
@@ -95,7 +95,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "mod6": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Mod6",
                 "button2_text": "Button 2",
@@ -103,7 +103,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "mod7": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Mod7",
                 "button2_text": "Button 2",
@@ -111,7 +111,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "mod8": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Mod8",
                 "button2_text": "Button 2",
@@ -119,7 +119,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "mod9": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Mod9",
                 "button2_text": "Button 2",
@@ -127,7 +127,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "mod10": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Mod10",
                 "button2_text": "Button 2",
@@ -135,7 +135,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "obb1": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Obb1",
                 "button2_text": "Button 2",
@@ -143,7 +143,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "obb2": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Obb2",
                 "button2_text": "Button 2",
@@ -151,7 +151,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "obb3": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Obb3",
                 "button2_text": "Button 2",
@@ -159,7 +159,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "obb4": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Obb4",
                 "button2_text": "Button 2",
@@ -167,7 +167,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "obb5": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Obb5",
                 "button2_text": "Button 2",
@@ -175,7 +175,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "obb6": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Obb6",
                 "button2_text": "Button 2",
@@ -183,7 +183,7 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "obb7": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Obb7",
                 "button2_text": "Button 2",
@@ -191,13 +191,29 @@ async def reply_to_messages(client, message):
                 "caption": "☠️☠️☠️☠️☠️"
             },
             "obb8": {
-                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
                 "button1_text": "Button 1",
                 "button1_url": "https://t.me/Obb8",
                 "button2_text": "Button 2",
                 "button2_url": "https://t.me/Obb8",
                 "caption": "☠️☠️☠️☠️☠️"
             },
+            "obb9": {
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb9",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb9",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb10": {
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb10",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb10",
+                "caption": "☠️☠️☠️☠️☠️"
+            }
         }
         for word, details in trigger_words.items():
             if word in question:
