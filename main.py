@@ -30,8 +30,7 @@ async def send_dangerous_reply(message):
     await sent_message.delete()
 
 # Function to handle user questions and provide answers
-@app.on_message(filters.text & ~filters.me)
-async def handle_messages(client, message):
+async def reply_to_messages(client, message):
     question = message.text.lower()
     if "Key" in question:
         # Create an inline keyboard with two buttons, each with a different URL
@@ -55,21 +54,21 @@ async def handle_messages(client, message):
     else:
         # Check for trigger words
         trigger_words = {
-            "Mod": {
-                "image_url": "https://telegra.ph/file/f6be52baa496065e85862.jpg",
-                "button1_text": "MOD HACK ✅",
-                "button1_url": "https://t.me/StarModz/4224",
-                "button2_text": "MOD OBB 🌟",
-                "button2_url": "https://t.me/StarModz/4222",
-                "caption": "StarModz Optimised Version No Crash and Fully SmoothSupport Android 9-14 (64 Bit 🫥👻"
+            "word1": {
+                "image_url": "https://example.com/image1.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://example.com/link1",
+                "button2_text": "Button 2",
+                "button2_url": "https://example.com/link2",
+                "caption": "Custom caption for word1"
             },
             "word2": {
-                "image_url": "https://telegra.ph/file/8710c559a915747a6622a.jpg",
+                "image_url": "https://example.com/image2.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/MadHackerTG",
+                "button1_url": "https://example.com/link3",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/MadHackerTG",
-                "caption": "😋😋😋😋😋"
+                "button2_url": "https://example.com/link4",
+                "caption": "Custom caption for word2"
             },
             # Add more trigger words with their respective details
         }
@@ -103,6 +102,69 @@ async def handle_messages(client, message):
                 # Delete the sent message
                 await sent_message.delete()
                 break
+                  # Check for trigger words
+        trigger_words = {
+            "Mod": {
+                "image_url": "https://example.com/image1.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://example.com/link1",
+                "button2_text": "Button 2",
+                "button2_url": "https://example.com/link2",
+                "caption": "Custom caption for word1"
+            },
+            "word2": {
+                "image_url": "https://example.com/image2.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://example.com/link3",
+                "button2_text": "Button 2",
+                "button2_url": "https://example.com/link4",
+                "caption": "Custom caption for word2"
+            },
+            # Add more trigger words with their respective details
+        }
+        for Mod, details in trigger_words.items():
+            if word in question:
+                image_url = details["image_url"]
+                button1_text = details["button1_text"]
+                button1_url = details["button1_url"]
+                button2_text = details["button2_text"]
+                button2_url = details["button2_url"]
+                caption = details["caption"]
+
+                # Create an inline keyboard with two buttons linked to the specified URLs
+                reply_markup = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(button1_text, url=button1_url),
+                            InlineKeyboardButton(button2_text, url=button2_url)
+                        ]
+                    ]
+                )
+                # Reply with a message containing the inline keyboard and the specified image
+                sent_message = await message.reply_photo(
+                    photo=image_url,
+                    caption=caption,
+                    reply_markup=reply_markup
+                )
+                # Wait for 30 seconds before deleting the message
+                await asyncio.sleep(30)
+
+                # Delete the sent message
+                await sent_message.delete()
+                break
+
+# Function to handle user questions and provide answers
+@app.on_message(filters.text & ~filters.me)
+async def handle_messages(client, message):
+    if message.text.lower() == "what is your favorite color?":
+        await message.reply_text("My favorite color is blue!")
+    elif message.text.lower() == "how are you?":
+        await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
+    elif message.text.lower() == "who created you?":
+        await message.reply_text("I was created by a team of developers at OpenAI.")
+    else:
+        await reply_to_messages(client, message)
 
 # Run the bot
 app.run()
+            
