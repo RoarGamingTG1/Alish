@@ -90,27 +90,8 @@ async def reply_to_mod_messages(message):
 
             # Delete the sent message
             await sent_message.delete()
-            break
-
-# Main message handling function
-@app.on_message(filters.text & ~filters.me)
-async def handle_messages(client, message):
-    if message.text.lower() == "what is your favorite color?":
-        sent_message = await message.reply_text("My favorite color is blue!")
-    elif message.text.lower() == "how are you?":
-        sent_message = await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
-    elif message.text.lower() == "who created you?":
-        sent_message = await message.reply_text("I was created by a team of developers at OpenAI.")
-    else:
-        await reply_to_mod_messages(message)
-
-    # Wait for 30 seconds before deleting the message
-    await asyncio.sleep(30)
-
-    # Delete the sent message
-    await sent_message.delete()
-    
-# Function to send threatening reply with random dangerous messages
+            
+            # Function to send threatening reply with random dangerous messages
 async def send_sms_reply(message):
     sms_messages = [
         "Mujhe Lagta hai ab tera time khatam Hony wala hai!  💣💥",
@@ -181,6 +162,24 @@ async def handle_messages(client, message):
         if word in question:
             await send_sms_reply(message)
             break
+
+# Main message handling function
+@app.on_message(filters.text & ~filters.me)
+async def handle_messages(client, message):
+    if message.text.lower() == "what is your favorite color?":
+        sent_message = await message.reply_text("My favorite color is blue!")
+    elif message.text.lower() == "how are you?":
+        sent_message = await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
+    elif message.text.lower() == "who created you?":
+        sent_message = await message.reply_text("I was created by a team of developers at OpenAI.")
+    else:
+        await reply_to_mod_messages(message)
+
+    # Wait for 30 seconds before deleting the message
+    await asyncio.sleep(30)
+
+    # Delete the sent message
+    await sent_message.delete()
 
 # Run the bot
 app.run()
