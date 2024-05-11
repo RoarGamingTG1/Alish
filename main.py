@@ -32,25 +32,15 @@ async def send_dangerous_reply(message):
 # Function to handle user questions and provide answers for Mod trigger words
 async def reply_to_mod_messages(client, message):
     question = message.text.lower()
-    trigger_words = {
-        "mod": {
-            "image_url": "https://example.com/mod.jpg",
-            "button1_text": "Button 1",
-            "button1_url": "https://example.com/mod1",
-            "button2_text": "Button 2",
-            "button2_url": "https://example.com/mod2",
-            "caption": "Mod caption"
-        },
-        # Add more trigger words with their respective details
-    }
-    for word, details in trigger_words.items():
+    trigger_words = ["mod1", "mod2", "mod3", "mod4", "mod5", "mod6", "mod7", "mod8", "mod9", "mod10"]
+    for word in trigger_words:
         if word in question:
-            image_url = details["image_url"]
-            button1_text = details["button1_text"]
-            button1_url = details["button1_url"]
-            button2_text = details["button2_text"]
-            button2_url = details["button2_url"]
-            caption = details["caption"]
+            image_url = f"https://example.com/{word}.jpg"
+            button1_text = "Button 1"
+            button1_url = f"https://t.me/{word}1"
+            button2_text = "Button 2"
+            button2_url = f"https://t.me/{word}2"
+            caption = "Mod caption"
 
             # Create an inline keyboard with two buttons linked to the specified URLs
             reply_markup = InlineKeyboardMarkup(
@@ -77,25 +67,15 @@ async def reply_to_mod_messages(client, message):
 # Function to handle user questions and provide answers for obb trigger words
 async def reply_to_obb_messages(client, message):
     question = message.text.lower()
-    trigger_words = {
-        "obb": {
-            "image_url": "https://example.com/obb.jpg",
-            "button1_text": "Button 1",
-            "button1_url": "https://example.com/obb1",
-            "button2_text": "Button 2",
-            "button2_url": "https://example.com/obb2",
-            "caption": "obb caption"
-        },
-        # Add more trigger words with their respective details
-    }
-    for word, details in trigger_words.items():
+    trigger_words = ["obb1", "obb2", "obb3", "obb4", "obb5", "obb6", "obb7", "obb8", "obb9", "obb10"]
+    for word in trigger_words:
         if word in question:
-            image_url = details["image_url"]
-            button1_text = details["button1_text"]
-            button1_url = details["button1_url"]
-            button2_text = details["button2_text"]
-            button2_url = details["button2_url"]
-            caption = details["caption"]
+            image_url = f"https://example.com/{word}.jpg"
+            button1_text = "Button 1"
+            button1_url = f"https://t.me/{word}1"
+            button2_text = "Button 2"
+            button2_url = f"https://t.me/{word}2"
+            caption = "obb caption"
 
             # Create an inline keyboard with two buttons linked to the specified URLs
             reply_markup = InlineKeyboardMarkup(
@@ -141,32 +121,6 @@ async def reply_to_key_messages(client, message):
 
         # Delete the sent message
         await sent_message.delete()
-        
-        # Function to handle user questions and provide answers for mod trigger words
-async def reply_to_mod_messages(client, message):
-    question = message.text.lower()
-    if "mod" in question:
-        # Create an inline keyboard with two buttons, each with a different URL
-        reply_markup = InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("Key Download ✅", url="http://firebaseapiserviceforkrafton.in")],
-                [InlineKeyboardButton("Video How To Get key 🫥", url="https://t.me/StarModTG/351472")]
-            ]
-        )
-        # Reply with a message containing the inline keyboard and an attached image
-        sent_message = await message.reply_photo(
-            photo="https://telegra.ph/file/0c5cab3ac6f9543497959.jpg",  # Replace with the actual image URL
-            caption="Click the button below to access 👻:",
-            reply_markup=reply_markup
-        )
-        # Wait for 30 seconds before deleting the message
-        await asyncio.sleep(30)
-
-        # Delete the sent message
-        await sent_message.delete()
-
-# Add more functions for other trigger words if needed...
-
 
 # Function to handle user questions and provide answers for non-trigger words
 async def reply_to_non_trigger_messages(client, message):
@@ -199,4 +153,3 @@ async def handle_messages(client, message):
 
 # Run the bot
 app.run()
-        
