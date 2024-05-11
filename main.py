@@ -152,8 +152,7 @@ async def reply_to_mod_messages(message):
             "image_url": "https://telegra.ph/file/46cc2a2050e7b04c5be5a.jpg"
         },
         "key": {
-            "caption": "Key Finding Latest Method How to find key! Key kaise nikaalen Watch Full VideoAnd find key by own very easily Poora Video dekho or badi asaani se khud key nikaalo
-"),
+            "caption": "Key Finding Latest Method How to find key! Key kaise nikaalen Watch Full VideoAnd find key by own very Poora Video dekho or badi asaani se khud key nikaalo"),
             "button1_text": "Watch Video 📷 ",
             "button1_url": "https://t.me/StarModTG/351507",
             "button2_text": "Kew Download 👿",
