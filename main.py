@@ -142,10 +142,10 @@ async def reply_to_key_messages(client, message):
         # Delete the sent message
         await sent_message.delete()
         
-        # Function to handle user questions and provide answers for Key trigger words
-async def reply_to_Mod_messages(client, message):
+        # Function to handle user questions and provide answers for mod trigger words
+async def reply_to_mod_messages(client, message):
     question = message.text.lower()
-    if "Mod" in question:
+    if "mod" in question:
         # Create an inline keyboard with two buttons, each with a different URL
         reply_markup = InlineKeyboardMarkup(
             [
@@ -199,4 +199,4 @@ async def handle_messages(client, message):
 
 # Run the bot
 app.run()
-    
+        
