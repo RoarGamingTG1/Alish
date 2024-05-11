@@ -76,40 +76,23 @@ async def send_dangerous_reply(message):
 
     # Delete the sent message
     await sent_message.delete()
-# Function to handle user questions and provide answers
-@app.on_message(filters.text & ~filters.me)
-async def reply_to_messages(client, message):
-    question = message.text.lower()
-    if "Key" in question:
-        # Create an inline keyboard with a button that opens the URL
-        reply_markup = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Download Key ✅", url="http://firebaseapiserviceforkrafton.in/")]]
-        )
-        # Reply with a message containing the inline keyboard and an attached image
-        sent_message = await message.reply_photo(
-            photo="https://telegra.ph/file/8710c559a915747a6622a.jpg",  # Replace with the actual image URL
-            caption="Download key 🔐 here  👇",
-            reply_markup=reply_markup
-        )
-        # Wait for 30 seconds before deleting the message
-        await asyncio.sleep(30)
 
-        # Delete the sent message
-        await sent_message.delete()
-        
 # Function to handle user questions and provide answers
 @app.on_message(filters.text & ~filters.me)
 async def reply_to_messages(client, message):
     question = message.text.lower()
-    if "ali" in question:
-        # Create an inline keyboard with a button that opens the URL
+    if "Key","key","Password","pass",in question:
+        # Create an inline keyboard with two buttons, each with a different URL
         reply_markup = InlineKeyboardMarkup(
-            [[InlineKeyboardButton("Access Hack", url="https://vt.tiktok.com/ZSYJhuTTM/")]]
+            [
+                [InlineKeyboardButton("Key Download ✅", url="http://firebaseapiserviceforkrafton.in")],
+                [InlineKeyboardButton("Video How To Get key 🫥", url="https://t.me/StarModTG/351472")]
+            ]
         )
         # Reply with a message containing the inline keyboard and an attached image
         sent_message = await message.reply_photo(
-            photo="https://telegra.ph/file/8710c559a915747a6622a.jpg",  # Replace with the actual image URL
-            caption="Click the button below to access the hack:",
+            photo="https://telegra.ph/file/0c5cab3ac6f9543497959.jpg",  # Replace with the actual image URL
+            caption="Click the button below to access 👻:",
             reply_markup=reply_markup
         )
         # Wait for 30 seconds before deleting the message
@@ -118,14 +101,14 @@ async def reply_to_messages(client, message):
         # Delete the sent message
         await sent_message.delete()
     else:
-    
         # Check for trigger words
         trigger_words = ["mad", "mad bhi", "mad bro"]
         for word in trigger_words:
             if word in question:
                 await send_dangerous_reply(message)
                 break
+                
 
 # Run the bot
 app.run()
-        
+    
