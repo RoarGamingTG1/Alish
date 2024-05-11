@@ -90,7 +90,7 @@ async def reply_to_mod_messages(message):
 
             # Delete the sent message
             await sent_message.delete()
-            
+            break
             # Function to send threatening reply with random dangerous messages
 async def send_sms_reply(message):
     sms_messages = [
