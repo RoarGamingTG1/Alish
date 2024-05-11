@@ -17,55 +17,7 @@ async def send_dangerous_reply(message):
     dangerous_messages = [
         "ab tera time khatam! 💣💥",
         "tere liye special surprise hai mere pass! 🎁🔥",
-        "aaj teri band bajne wali hai! 🎶🔪",
-        "yahaan tera swagat hai! 🕶️🔫",
-        "tu kab sudhrega? Kabhi nahi! 😈👿",
-        "mere aage tu kuch bhi nahi! hai 🦾🔪",
-        "tu mujhse panga le raha hai? Bad idea! 💀🔥",
-        "tera ant aaya hai! 😈👻",
-        "aaj raat teri neend uda doongi! 💤🚫",
-        "tera time up! ⏰💀",
-        "mujhe nafrat hai teri muskurahat se! 😡😈",
-        "ab tujhe koi nahi bacha sakta! 👹🔥",
-        "meri raah mein aane ki sazaa tuje bhugatni padegi! 😈🔪",
-        "main teri zindagi se sab kuch cheen loongi! 💀👿",
-        "tere sapne ab mera ho gaye hain! 😈💭",
-        "ab tu mere control mein hai! 🎮🤖",
-        "tujhe bachane ki koi jagah nahi hai! 🚫🤬",
-        "teri zindagi ab meri mutthi mein hai! 👊😈",
-        "meri bheer tujhe kuchal degi! 😠👣",
-        "ab tu sirf mera khilona hai! 🧸😈",
-        "main teri zindagi se har khushi cheen loongi! 😈🎭",
-        "tera ant ab mera shuruwaat hai! 💥🔥",
-        "mere aane se teri zindagi andheri ho gayi hai! 🌑😈",
-        "tujhe paagal kar doongi! 😵🌀",
-        "ab tera ant aaya hai! 💀🔚",
-        "mere hath mein tera jaanaza hai! ⚰️😈",
-        "main tujhe daraane wali nahi, sachai batane walj hoon! 😈💬",
-        "ab tu sirf mera rogi hai! 🤒🔥",
-        "mere bina tu adhoora hai! 😈❌",
-        "ab tu mujhse bach nahi sakta! 🏃‍♂️🔪",
-        "meri ghatak shakti se tu nahi bach sakta! 💥🔥",
-        "ab teri zindagi ka anth kar doongi! 🏁😈",
-        "main teri zindagi ko barbaad kar doongi! 💣💔",
-        "ab tu mere gulam hai! 👑😈",
-        "mere saamne tu kuch nahi! 🚫👀",
-        "mere liye tu ek chunaavi maatra hai! 🗳️😈",
-        "mere bina teri zindagi adhoori hai! 😈🔄",
-        "ab tera antim samay hai! omphat suha ha ⌛😱",
-        "meri raftar se teri bhagti jindagi ab khatam! hojayegi 🏎️🔥",
-        "mere aane se teri raaton mein andhera chha gaya hai! 🌑😈",
-        "ab teri zindagi mein andhera chha gaya hai! 🌚🔥",
-        "teri zindagi ab mere haath mein hai! 🖐️😈",
-        "ab tu sirf mera khel hai! 🎲😈",
-        "main teri zindagi ki director hoon! 🎬😈",
-        "mere bina tu adhoora hai! Sachi 😈❌",
-        "ab tu sirf mera puppet hai! 🎭🔥",
-        "mere saath khelne ki himmat hai tujhme? 😈🃏",
-        "main teri zindagi ki villain hoon! 😈🎥",
-        "ab tu mere control mein hai! 🕹️🔒",
-        "meri duniya mein ab tuje jagah nahi hai! 🌎🔚",
-        "main teri zindagi ka dictator hoon! 👮‍♂️😈"
+        # Add more threatening messages here if needed
     ]
 
     reply = random.choice(dangerous_messages)
@@ -78,7 +30,6 @@ async def send_dangerous_reply(message):
     await sent_message.delete()
 
 # Function to handle user questions and provide answers
-@app.on_message(filters.text & ~filters.me)
 async def reply_to_messages(client, message):
     question = message.text.lower()
     if "Key" in question:
@@ -102,13 +53,68 @@ async def reply_to_messages(client, message):
         await sent_message.delete()
     else:
         # Check for trigger words
-        trigger_words = ["mad", "mad bhi", "mad bro"]
-        for word in trigger_words:
+        trigger_words = {
+            "word1": {
+                "image_url": "https://telegra.ph/file/0c5cab3ac6f9543497959.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/StarModTG",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/StarModTG",
+                "caption": "✅✅✅💒💒"
+            },
+            "word2": {
+                "image_url": "https://telegra.ph/file/8710c559a915747a6622a.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/MadHackerTG",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/MadHackerTG",
+                "caption": "😋😋😋😋😋"
+            },
+            # Add more trigger words with their respective details
+        }
+        for word, details in trigger_words.items():
             if word in question:
-                await send_dangerous_reply(message)
+                image_url = details["image_url"]
+                button1_text = details["button1_text"]
+                button1_url = details["button1_url"]
+                button2_text = details["button2_text"]
+                button2_url = details["button2_url"]
+                caption = details["caption"]
+
+                # Create an inline keyboard with two buttons linked to the specified URLs
+                reply_markup = InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(button1_text, url=button1_url),
+                            InlineKeyboardButton(button2_text, url=button2_url)
+                        ]
+                    ]
+                )
+                # Reply with a message containing the inline keyboard and the specified image
+                sent_message = await message.reply_photo(
+                    photo=image_url,
+                    caption=caption,
+                    reply_markup=reply_markup
+                )
+                # Wait for 30 seconds before deleting the message
+                await asyncio.sleep(30)
+
+                # Delete the sent message
+                await sent_message.delete()
                 break
-                
+
+# Function to handle user questions and provide answers
+@app.on_message(filters.text & ~filters.me)
+async def handle_messages(client, message):
+    if message.text.lower() == "what is your favorite color?":
+        await message.reply_text("My favorite color is blue!")
+    elif message.text.lower() == "how are you?":
+        await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
+    elif message.text.lower() == "who created you?":
+        await message.reply_text("I was created by a team of developers at OpenAI.")
+    else:
+        await reply_to_messages(client, message)
 
 # Run the bot
 app.run()
-    
+        
