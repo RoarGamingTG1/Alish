@@ -30,7 +30,8 @@ async def send_dangerous_reply(message):
     await sent_message.delete()
 
 # Function to handle user questions and provide answers
-async def reply_to_messages(client, message):
+@app.on_message(filters.text & ~filters.me)
+async def handle_messages(client, message):
     question = message.text.lower()
     if "Key" in question:
         # Create an inline keyboard with two buttons, each with a different URL
@@ -103,24 +104,5 @@ async def reply_to_messages(client, message):
                 await sent_message.delete()
                 break
 
-# Function to handle user questions and provide answers
-@app.on_message(filters.text & ~filters.me)
-async def handle_messages(client, message):
-    if message.text.lower() == "what is your favorite color?":
-        sent_message = await message.reply_text("My favorite color is blue!")
-    elif message.text.lower() == "how are you?":
-        sent_message = await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
-    elif message.text.lower() == "who created you?":
-        sent_message = await message.reply_text("I was created by a team of developers at OpenAI.")
-    else:
-        sent_message = await reply_to_messages(client, message)
-    
-    # Wait for 30 seconds before deleting the message
-    await asyncio.sleep(30)
-
-    # Delete the sent message
-    await sent_message.delete()
-
 # Run the bot
 app.run()
-            
