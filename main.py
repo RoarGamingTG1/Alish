@@ -3,7 +3,6 @@ import random
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from obb_responses import reply_to_obb_messages
 
 # Bot credentials
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
@@ -53,168 +52,105 @@ async def reply_to_messages(client, message):
         # Delete the sent message
         await sent_message.delete()
     else:
-        # Check for trigger words and their respective details
+        # Check for trigger words
         trigger_words = {
-            "mod1": {
+            "word1": {
                 "image_url": "https://telegra.ph/file/0c5cab3ac6f9543497959.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod1",
+                "button1_url": "https://t.me/StarModTG",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod1",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://t.me/StarModTG",
+                "caption": "✅✅✅💒💒"
             },
-            "mod2": {
+            "word2": {
                 "image_url": "https://telegra.ph/file/8710c559a915747a6622a.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod2",
+                "button1_url": "https://t.me/MadHackerTG",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod2",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://t.me/MadHackerTG",
+                "caption": "😋😋😋😋😋"
             },
-            "mod3": {
-                "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg",
+            "Mod": {
+                "image_url": "https://example.com/mod.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod3",
+                "button1_url": "https://example.com/mod1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod3",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/mod2",
+                "caption": "Mod caption"
             },
-            "mod4": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+            "obb": {
+                "image_url": "https://example.com/obb.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod4",
+                "button1_url": "https://example.com/obb1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod4",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/obb2",
+                "caption": "obb caption"
             },
-            "mod5": {
-                "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg",
+            "Hack": {
+                "image_url": "https://example.com/hack.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod5",
+                "button1_url": "https://example.com/hack1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod5",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/hack2",
+                "caption": "Hack caption"
             },
-            "mod6": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+            "Use": {
+                "image_url": "https://example.com/use.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod6",
+                "button1_url": "https://example.com/use1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod6",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/use2",
+                "caption": "Use caption"
             },
-            "mod7": {
-                "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg",
+            "Mt": {
+                "image_url": "https://example.com/mt.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod7",
+                "button1_url": "https://example.com/mt1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod7",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/mt2",
+                "caption": "Mt caption"
             },
-            "mod8": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+            "Editor": {
+                "image_url": "https://example.com/editor.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod8",
+                "button1_url": "https://example.com/editor1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod8",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/editor2",
+                "caption": "Editor caption"
             },
-            "mod9": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+            "Mad": {
+                "image_url": "https://example.com/mad.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod9",
+                "button1_url": "https://example.com/mad1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod9",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/mad2",
+                "caption": "Mad caption"
             },
-            "mod10": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+            "Rz": {
+                "image_url": "https://example.com/rz.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Mod10",
+                "button1_url": "https://example.com/rz1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Mod10",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/rz2",
+                "caption": "Rz caption"
             },
-            "obb1": {
-                "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg",
+            "Ramjan": {
+                "image_url": "https://example.com/ramjan.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb1",
+                "button1_url": "https://example.com/ramjan1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb1",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/ramjan2",
+                "caption": "Ramjan caption"
             },
-            "obb2": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+            "hero": {
+                "image_url": "https://example.com/hero.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb2",
+                "button1_url": "https://example.com/hero1",
                 "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb2",
-                "caption": "☠️☠️☠️☠️☠️"
+                "button2_url": "https://example.com/hero2",
+                "caption": "Hero caption"
             },
-            "obb3": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb3",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb3",
-                "caption": "☠️☠️☠️☠️☠️"
-            },
-            "obb4": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb4",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb4",
-                "caption": "☠️☠️☠️☠️☠️"
-            },
-            "obb5": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb5",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb5",
-                "caption": "☠️☠️☠️☠️☠️"
-            },
-            "obb6": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb6",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb6",
-                "caption": "☠️☠️☠️☠️☠️"
-            },
-            "obb7": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb7",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb7",
-                "caption": "☠️☠️☠️☠️☠️"
-            },
-            "obb8": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb8",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb8",
-                "caption": "☠️☠️☠️☠️☠️"
-            },
-            "obb9": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb9",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb9",
-                "caption": "☠️☠️☠️☠️☠️"
-            },
-            "obb10": {
-                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://t.me/Obb10",
-                "button2_text": "Button 2",
-                "button2_url": "https://t.me/Obb10",
-                "caption": "☠️☠️☠️☠️☠️"
-            }
+            # Add more trigger words with their respective details
         }
         for word, details in trigger_words.items():
             if word in question:
