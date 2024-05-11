@@ -81,7 +81,7 @@ async def send_dangerous_reply(message):
 @app.on_message(filters.text & ~filters.me)
 async def reply_to_messages(client, message):
     question = message.text.lower()
-    if "Key","key","Password","pass",in question:
+    if "Key","key","Password","pass" in question:
         # Create an inline keyboard with two buttons, each with a different URL
         reply_markup = InlineKeyboardMarkup(
             [
