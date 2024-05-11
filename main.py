@@ -52,77 +52,154 @@ async def reply_to_messages(client, message):
         # Delete the sent message
         await sent_message.delete()
     else:
-        # Check for trigger words
+        # Check for trigger words and their respective details
         trigger_words = {
-            "word1": {
-                "image_url": "https://example.com/image1.jpg",
+            "mod1": {
+                "image_url": "https://telegra.ph/file/0c5cab3ac6f9543497959.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://example.com/link1",
+                "button1_url": "https://t.me/Mod1",
                 "button2_text": "Button 2",
-                "button2_url": "https://example.com/link2",
-                "caption": "Custom caption for word1"
+                "button2_url": "https://t.me/Mod1",
+                "caption": "☠️☠️☠️☠️☠️"
             },
-            "word2": {
-                "image_url": "https://example.com/image2.jpg",
+            "mod2": {
+                "image_url": "https://telegra.ph/file/8710c559a915747a6622a.jpg",
                 "button1_text": "Button 1",
-                "button1_url": "https://example.com/link3",
+                "button1_url": "https://t.me/Mod2",
                 "button2_text": "Button 2",
-                "button2_url": "https://example.com/link4",
-                "caption": "Custom caption for word2"
+                "button2_url": "https://t.me/Mod2",
+                "caption": "☠️☠️☠️☠️☠️"
             },
-            # Add more trigger words with their respective details
+            "mod3": {
+                "image_url": "https://telegra.ph/file/3c4856c05a00b85599b0b.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Mod3",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Mod3",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "mod4": {
+                "image_url": "https://telegra.ph/file/9a743ab324e91f35d3ed8.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Mod4",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Mod4",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "mod5": {
+                "image_url": "https://telegra.ph/file/4f17b51c0b5f23b858c7a.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Mod5",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Mod5",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "mod6": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Mod6",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Mod6",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "mod7": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Mod7",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Mod7",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "mod8": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Mod8",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Mod8",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "mod9": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Mod9",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Mod9",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "mod10": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Mod10",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Mod10",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb1": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb1",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb1",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb2": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb2",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb2",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb3": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb3",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb3",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb4": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb4",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb4",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb5": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb5",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb5",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb6": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb6",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb6",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb7": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb7",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb7",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
+            "obb8": {
+                "image_url": "https://telegra.ph/file/5c7fa8de5bc22645eb6aa.jpg",
+                "button1_text": "Button 1",
+                "button1_url": "https://t.me/Obb8",
+                "button2_text": "Button 2",
+                "button2_url": "https://t.me/Obb8",
+                "caption": "☠️☠️☠️☠️☠️"
+            },
         }
         for word, details in trigger_words.items():
-            if word in question:
-                image_url = details["image_url"]
-                button1_text = details["button1_text"]
-                button1_url = details["button1_url"]
-                button2_text = details["button2_text"]
-                button2_url = details["button2_url"]
-                caption = details["caption"]
-
-                # Create an inline keyboard with two buttons linked to the specified URLs
-                reply_markup = InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(button1_text, url=button1_url),
-                            InlineKeyboardButton(button2_text, url=button2_url)
-                        ]
-                    ]
-                )
-                # Reply with a message containing the inline keyboard and the specified image
-                sent_message = await message.reply_photo(
-                    photo=image_url,
-                    caption=caption,
-                    reply_markup=reply_markup
-                )
-                # Wait for 30 seconds before deleting the message
-                await asyncio.sleep(30)
-
-                # Delete the sent message
-                await sent_message.delete()
-                break
-                  # Check for trigger words
-        trigger_words = {
-            "Mod": {
-                "image_url": "https://example.com/image1.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://example.com/link1",
-                "button2_text": "Button 2",
-                "button2_url": "https://example.com/link2",
-                "caption": "Custom caption for word1"
-            },
-            "word2": {
-                "image_url": "https://example.com/image2.jpg",
-                "button1_text": "Button 1",
-                "button1_url": "https://example.com/link3",
-                "button2_text": "Button 2",
-                "button2_url": "https://example.com/link4",
-                "caption": "Custom caption for word2"
-            },
-            # Add more trigger words with their respective details
-        }
-        for Mod, details in trigger_words.items():
             if word in question:
                 image_url = details["image_url"]
                 button1_text = details["button1_text"]
@@ -157,14 +234,20 @@ async def reply_to_messages(client, message):
 @app.on_message(filters.text & ~filters.me)
 async def handle_messages(client, message):
     if message.text.lower() == "what is your favorite color?":
-        await message.reply_text("My favorite color is blue!")
+        sent_message = await message.reply_text("My favorite color is blue!")
     elif message.text.lower() == "how are you?":
-        await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
+        sent_message = await message.reply_text("I'm just a bot, but I'm doing well. How can I assist you?")
     elif message.text.lower() == "who created you?":
-        await message.reply_text("I was created by a team of developers at OpenAI.")
+        sent_message = await message.reply_text("I was created by a team of developers at OpenAI.")
     else:
-        await reply_to_messages(client, message)
+        sent_message = await reply_to_messages(client, message)
+    
+    # Wait for 30 seconds before deleting the message
+    await asyncio.sleep(30)
+
+    # Delete the sent message
+    await sent_message.delete()
 
 # Run the bot
 app.run()
-            
+                
