@@ -3,6 +3,7 @@ import random
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from obb_responses import reply_to_obb_messages
 
 # Bot credentials
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
