@@ -26,7 +26,7 @@ conn.commit()
 # Function to send threatening reply with random dangerous messages
 async def send_dangerous_reply(message):
     dangerous_messages = [
-       "Mad bhai ek asli legend hain!",
+               "Mad bhai ek asli legend hain!",
         "Mad bhai apne kaam mein ek ustaad hain!",
         "Mad bhai ke hunar ko koi nahi takkar de sakta!",
         "Mad bhai ek genius developer hain!",
@@ -88,7 +88,7 @@ async def send_random_reply(message):
         "Teri toh! 😡",
         "Kaun banaya tujhe? 😠",
         "Tere muh me ghee shakkar! 😤",
-            "Tum bilkul bekaar ho. 😡",
+        "Tum bilkul bekaar ho. 😡",
     "Koi tumhe pasand nahi karta. 😤",
     "Tum kabhi zindagi mein kamyaab nahi hoge. 😠",
     "Tum ek nakami ho. 😒",
@@ -108,8 +108,8 @@ async def send_random_reply(message):
     "Tum jaise logon ko dekh kar mujhe apne aap par afsos hota hai. 😔",
     "Tumhara chehra dekh kar lagta hai, bhagwaan ne galti se extra time waste kiya. 😒",
     "Tumhara dimaag chuhe ki tarah chal raha hai. 🐭",
-   "Tujhe toh apni shadow bhi chhod kar chali gayi hai. 😂",
-        
+   "Tujhe toh apni shadow bhi chhod kar chali gayi hai. 😂"
+   
     ]
 
     reply = random.choice(random_messages)
@@ -271,8 +271,8 @@ async def send_supporter_post(message):
         [
             [
                 InlineKeyboardButton("Share ✅", url=group_link),
-                InlineKeyboardButton("Points 😀", callback_data="show_points"),
-                InlineKeyboardButton("Leaderboard 🗽", callback_data="show_leaderboard")
+                InlineKeyboardButton("Points 📢", callback_data="show_points"),
+                InlineKeyboardButton("Leader 🎗️", callback_data="show_leaderboard")
             ]
         ]
     )
@@ -283,6 +283,12 @@ async def send_supporter_post(message):
         caption=caption,
         reply_markup=reply_markup
     )
+    
+    # Wait for 30 seconds before deleting the message
+    await asyncio.sleep(30)
+    
+    # Delete the sent message
+    await sent_message.delete()
 
 # Function to handle the "Share" button callback
 @app.on_callback_query(filters.regex("share"))
@@ -339,4 +345,4 @@ async def handle_messages(client, message):
 
 # Run the bot
 app.run()
-  
+      
