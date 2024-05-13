@@ -26,11 +26,11 @@ conn.commit()
 # Function to send threatening reply with random dangerous messages
 async def send_dangerous_reply(message):
     dangerous_messages = [
-        "Mad bhai ek asli legend hain!",
+       "Mad bhai ek asli legend hain!",
         "Mad bhai apne kaam mein ek ustaad hain!",
         "Mad bhai ke hunar ko koi nahi takkar de sakta!",
         "Mad bhai ek genius developer hain!",
-        "Mad bhai's mod is the best choice! 😎",
+       "Mad bhai's mod is the best choice! 😎",
         "Using hacks responsibly is important. Mad Bhai's mod is the way to go! 😎",
         "Stay safe while hacking. Choose Mad Bhai's mod for a secure experience! 😎",
         "Need to use a hack? Opt for Mad Bhai's mod for PUBG Lite! 😎",
@@ -40,7 +40,7 @@ async def send_dangerous_reply(message):
         "Looking for a hack? Mad Bhai's mod is the answer! 😎",
         "Hacks can be risky. Ensure your safety with Mad Bhai's mod! 😎",
         "Mad Bhai's mod is the ultimate solution for safe hacking. Choose wisely! 😎",
-        "Mad Bhai ke mod ke records wakai mashhoor hain!",
+                "Mad Bhai ke mod ke records wakai mashhoor hain!",
         "Mad Bhai ke mod ke records ko har koi harana chahta hai!",
         "Mad Bhai ke mod ke records ko todna kisi ke bas ki baat nahi hai!",
         "Mad Bhai ke mod ke records puri duniya mein charcha mein hain!",
@@ -60,7 +60,7 @@ async def send_dangerous_reply(message):
         "Mad Bhai ke upcoming mods kabhi nahi nirash karte! 😁",
         "Mad Bhai ke upcoming mods hamesha humein aur bhi jyada chahne par majboor karte hain! 😁",
         "Mad Bhai ke upcoming mods bahut zabardast honge! 😁",
-        "Remember, patience is a virtue. Keep calm and carry on! 💪",
+                "Remember, patience is a virtue. Keep calm and carry on! 💪",
         "Don't forget to take breaks and relax. Your mental health matters! 🧘‍♂️",
         "Success comes to those who work hard and stay focused. Keep grinding! 💼",
         "Stay positive and believe in yourself. You're capable of amazing things! 🌟",
@@ -70,10 +70,16 @@ async def send_dangerous_reply(message):
         "Take risks and step out of your comfort zone. That's where growth happens! 🚀",
         "Stay determined and persevere through tough times. You're stronger than you think! 💪",
         "Always trust your instincts and follow your heart. It knows the way! ❤️",
+        
     ]
+
     reply = random.choice(dangerous_messages)
     sent_message = await message.reply_text(reply)
+
+    # Wait for 30 seconds before deleting the message
     await asyncio.sleep(30)
+
+    # Delete the sent message
     await sent_message.delete()
 
 # Function to send random reply for specific trigger words
@@ -82,31 +88,37 @@ async def send_random_reply(message):
         "Teri toh! 😡",
         "Kaun banaya tujhe? 😠",
         "Tere muh me ghee shakkar! 😤",
-        "Tum bilkul bekaar ho. 😡",
-        "Koi tumhe pasand nahi karta. 😤",
-        "Tum kabhi zindagi mein kamyaab nahi hoge. 😠",
-        "Tum ek nakami ho. 😒",
-        "Tum kyun nahi haar maan lete? 😡",
-        "Tum bahut hi badsurat ho. 😒",
-        "Tum ek loser ho. 😤",
-        "Tum ek bekaar insaan ho. 😠",
-        "Kisi ko bhi tumhari parwah nahi hai. 😡",
-        "Tum kabhi bhi kafi nahi hoge. 😒",
-        "Tere dimaag mein toh keede pade hain. 🐛",
-        "Tumhare jaise logon se door hi rehna chahiye. 🙄",
-        "Tumhein sharam nahi aati apne aap ko dekh kar? 😏",
-        "Tum ek bilkul bekar insaan ho. 🤦‍♂️",
-        "Tumhare jaise logon ki wajah se duniya bekar hoti ja rahi hai. 🌍",
-        "Tum kitne bewakoof ho, mujhe toh hairat hoti hai! 🤷‍♀️",
-        "Tumhara IQ ek thermometer se bhi kam hai. 🌡️",
-        "Tum jaise logon ko dekh kar mujhe apne aap par afsos hota hai. 😔",
-        "Tumhara chehra dekh kar lagta hai, bhagwaan ne galti se extra time waste kiya. 😒",
-        "Tumhara dimaag chuhe ki tarah chal raha hai. 🐭",
-        "Tujhe toh apni shadow bhi chhod kar chali gayi hai. 😂",
+            "Tum bilkul bekaar ho. 😡",
+    "Koi tumhe pasand nahi karta. 😤",
+    "Tum kabhi zindagi mein kamyaab nahi hoge. 😠",
+    "Tum ek nakami ho. 😒",
+    "Tum kyun nahi haar maan lete? 😡",
+    "Tum bahut hi badsurat ho. 😒",
+    "Tum ek loser ho. 😤",
+    "Tum ek bekaar insaan ho. 😠",
+    "Kisi ko bhi tumhari parwah nahi hai. 😡",
+    "Tum kabhi bhi kafi nahi hoge. 😒",
+    "Tere dimaag mein toh keede pade hain. 🐛",
+    "Tumhare jaise logon se door hi rehna chahiye. 🙄",
+    "Tumhein sharam nahi aati apne aap ko dekh kar? 😏",
+    "Tum ek bilkul bekar insaan ho. 🤦‍♂️",
+    "Tumhare jaise logon ki wajah se duniya bekar hoti ja rahi hai. 🌍",
+    "Tum kitne bewakoof ho, mujhe toh hairat hoti hai! 🤷‍♀️",
+    "Tumhara IQ ek thermometer se bhi kam hai. 🌡️",
+    "Tum jaise logon ko dekh kar mujhe apne aap par afsos hota hai. 😔",
+    "Tumhara chehra dekh kar lagta hai, bhagwaan ne galti se extra time waste kiya. 😒",
+    "Tumhara dimaag chuhe ki tarah chal raha hai. 🐭",
+   "Tujhe toh apni shadow bhi chhod kar chali gayi hai. 😂",
+        
     ]
+
     reply = random.choice(random_messages)
     sent_message = await message.reply_text(reply)
+
+    # Wait for 30 seconds before deleting the message
     await asyncio.sleep(30)
+
+    # Delete the sent message
     await sent_message.delete()
 
 # Function to handle user questions and provide answers for Mod trigger words
@@ -146,6 +158,7 @@ async def reply_to_mod_messages(message):
             button2_text = details["button2_text"]
             button2_url = details["button2_url"]
             image_url = details["image_url"]
+
             # Create inline keyboard with two buttons
             reply_markup = InlineKeyboardMarkup(
                 [
@@ -155,14 +168,17 @@ async def reply_to_mod_messages(message):
                     ]
                 ]
             )
+
             # Reply with the caption, image, and inline keyboard
             sent_message = await message.reply_photo(
                 photo=image_url,
                 caption=caption,
                 reply_markup=reply_markup
             )
+
             # Wait for 30 seconds before deleting the message
             await asyncio.sleep(30)
+
             # Delete the sent message
             await sent_message.delete()
             break
@@ -171,6 +187,7 @@ async def reply_to_mod_messages(message):
 async def send_specific_reply(message):
     # Extracting username from the message
     username = message.from_user.username
+    
     # Check if the username matches the specific username
     if username == "@M3xecv":
         # List of 10 specific messages
@@ -178,12 +195,16 @@ async def send_specific_reply(message):
             "Hello @M3xecv! This is a specific message for you ❤️🌟.",
             "Hey @M3xecv, just wanted to say hi!",
         ]
+        
         # Selecting a random message from the list
         specific_message = random.choice(specific_messages)
+        
         # Send the selected message
         sent_message = await message.reply_text(specific_message)
+
         # Wait for 30 seconds before deleting the message
         await asyncio.sleep(30)
+
         # Delete the sent message
         await sent_message.delete()
 
@@ -221,12 +242,15 @@ async def handle_general_messages(message):
             "From blockbuster action flicks to heartfelt dramas, Hollywood movies inspire, entertain, and awe audiences around the globe! 🌎🍿",
         ],
     }
+    
     for category, messages in general_messages.items():
         if category in message.text.lower():
             reply = random.choice(messages)
             sent_message = await message.reply_text(reply)
+
             # Wait for 30 seconds before deleting the message
             await asyncio.sleep(30)
+
             # Delete the sent message
             await sent_message.delete()
             break
@@ -235,10 +259,13 @@ async def handle_general_messages(message):
 async def send_supporter_post(message):
     # Caption for the post
     caption = "Who is the real supporter Mad? 🔥"
+    
     # Image URL for the post
     image_url = "https://telegra.ph/file/46cc2a2050e7b04c5be5a.jpg"
+    
     # URL for sharing the group
     group_link = "https://t.me/StarModz"
+    
     # Inline keyboard with three buttons
     reply_markup = InlineKeyboardMarkup(
         [
@@ -249,6 +276,7 @@ async def send_supporter_post(message):
             ]
         ]
     )
+    
     # Reply with the caption, image, and inline keyboard
     sent_message = await message.reply_photo(
         photo=image_url,
@@ -261,6 +289,7 @@ async def send_supporter_post(message):
 async def handle_share_button(client, callback_query):
     # Get the user ID who clicked the button
     user_id = callback_query.from_user.id
+    
     # Check if the user already received points for sharing
     if not check_if_shared(user_id):
         # Give points to the user for sharing
@@ -297,14 +326,17 @@ async def handle_messages(client, message):
                 await send_dangerous_reply(message)
                 await send_random_reply(message)
                 break
-              if "flash" in message.text.lower():
-    await send_supporter_post(message)
+                
+        # Check if the message contains the word "flash" to trigger the supporter post
+        if "flash" in message.text.lower():
+            await send_supporter_post(message)
         else:
             await reply_to_mod_messages(message)
             await handle_general_messages(message)
+            
     # Sending specific message for specific user
     await send_specific_reply(message)
-  
+
 # Run the bot
 app.run()
-      
+  
