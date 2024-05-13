@@ -1,5 +1,4 @@
 pyrogram
-sqlite3
 tgcrypto
 requests
 fpdf
