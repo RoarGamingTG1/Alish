@@ -302,7 +302,9 @@ async def handle_messages(client, message):
             await handle_general_messages(message)
     # Sending specific message for specific user
     await send_specific_reply(message)
-
+if "flash" in message.text.lower():
+    await send_supporter_post(message)
+  
 # Run the bot
 app.run()
       
