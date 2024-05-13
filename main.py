@@ -297,13 +297,13 @@ async def handle_messages(client, message):
                 await send_dangerous_reply(message)
                 await send_random_reply(message)
                 break
+              if "flash" in message.text.lower():
+    await send_supporter_post(message)
         else:
             await reply_to_mod_messages(message)
             await handle_general_messages(message)
     # Sending specific message for specific user
     await send_specific_reply(message)
-if "flash" in message.text.lower():
-    await send_supporter_post(message)
   
 # Run the bot
 app.run()
