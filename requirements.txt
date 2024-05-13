@@ -1,4 +1,5 @@
 pyrogram
+sqlite3
 tgcrypto
 requests
 fpdf
@@ -6,4 +7,3 @@ tqdm
 vosk
 yt-dlp
 telebot
-sqlite3
