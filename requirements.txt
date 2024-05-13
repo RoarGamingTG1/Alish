@@ -6,4 +6,4 @@ tqdm
 vosk
 yt-dlp
 telebot
-
+sqlite3
