@@ -263,7 +263,7 @@ async def send_supporter_post(message):
     # Image URL for the post
     image_url = "https://telegra.ph/file/46cc2a2050e7b04c5be5a.jpg"
     
-    # URL for sharing the group
+     # URL for sharing the group
     group_link = "https://t.me/StarModz"
     
     # Inline keyboard with three buttons
@@ -275,8 +275,30 @@ async def send_supporter_post(message):
                 InlineKeyboardButton("Leader 🎗️", callback_data="show_leaderboard")
             ]
         ]
-    )
+    )   
+     # URLs for the six buttons
+    button1_url = "https://t.me/MadGamerTG"
+    button2_url = "https://t.me/StarFeedZ"
+    button3_url = "https://t.me/MadHackerTG"
+    button4_url = "https://t.me/StarModz"
+    button5_url = "https://t.me/StarHelpline"
+    button6_url = "https://t.me/MadAccountStore"
     
+    # Inline keyboard with six buttons
+    reply_markup = InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("Join 🎗️", url=button1_url),
+                InlineKeyboardButton("Join 📢", url=button2_url),
+                InlineKeyboardButton("Join 🤡", url=button3_url),
+            ],
+            [
+                InlineKeyboardButton("Join ❤️", url=button4_url),
+                InlineKeyboardButton("Join 🎉", url=button5_url),
+                InlineKeyboardButton("Join 😍", url=button6_url),
+            ]
+        ]
+    )
     # Reply with the caption, image, and inline keyboard
     sent_message = await message.reply_photo(
         photo=image_url,
