@@ -467,4 +467,4 @@ async def handle_messages(client, message):
     await send_specific_reply(message)
 
 # Run the bot and react with random emojis
-app.run(react_with_random_emojis())
+app.run()
