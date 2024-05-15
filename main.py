@@ -188,7 +188,7 @@ async def send_dangerous_reply(message):
     "⛔ Channel Code of Conduct: Mad Hacker ne apne channel ke users ko ek code of conduct follow karne ke liye kaha hai aur unhein samjha diya hai ki agar koi ladkiyon ko harass karega to strict action liya jayega!",
     "❌ Harassment Notice: Mad Hacker ne apne channel mein harassment ko rokne ke liye ek important notice jaari kiya hai aur keh diya hai ki agar koi aise harkat karta hai to usko turant channel se bahar nikal diya jayega!",
     "🚫 No Tolerance for Harassment: Mad Hacker ne apne channel mein harassment ke liye koi jagah nahi chhodi hai aur keh diya hai ki agar koi aise harkat karega to usko channel se ban kiya jayega!",
-    "⛔ Harassment Policy Update: Mad Hacker ne apne channel mein harassment ko rokne ke liye ek strict policy update ki hai aur keh diya hai ki agar koi aise harkat karta hai to usko channel se nikal diya
+    "⛔ Harassment Policy Update: Mad Hacker ne apne channel mein harassment ko rokne ke liye ek strict policy update ki hai aur keh diya hai ki agar koi aise harkat karta hai to usko channel se nikal diya",
         
     ]
 
