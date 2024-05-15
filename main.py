@@ -423,6 +423,12 @@ def give_points(user_id, points):
 # Main message handling function
 @app.on_message(filters.text & ~filters.me)
 async def handle_messages(client, message):
+    # Reacting to the user post with a random emoji
+    emojis = ["👀", "😂", "😊", "👍", "❤️", "🎉"]  # List of emojis to choose from
+    reaction = random.choice(emojis)
+    await message.react(reaction)
+    
+async def handle_messages(client, message):
     if message.text.lower() == "what is your favorite color?":
         sent_message = await message.reply_text("My favorite color is blue!")
     elif message.text.lower() == "how are you?":
@@ -450,7 +456,7 @@ async def handle_messages(client, message):
     # Reacting to the user post with a random emoji
     emojis = ["👀", "😂", "😊", "👍", "❤️", "🎉"]  # List of emojis to choose from
     reaction = random.choice(emojis)
-    await message.reply(reaction)
+     await message.reply(reaction)
     
 
 # Run the bot
