@@ -207,27 +207,6 @@ async def send_random_reply(message):
         "Teri toh! 😡",
         "Kaun banaya tujhe? 😠",
         "Tere muh me ghee shakkar! 😤",
-        "Tum bilkul bekaar ho. 😡",
-    "Koi tumhe pasand nahi karta. 😤",
-    "Tum kabhi zindagi mein kamyaab nahi hoge. 😠",
-    "Tum ek nakami ho. 😒",
-    "Tum kyun nahi haar maan lete? 😡",
-    "Tum bahut hi badsurat ho. 😒",
-    "Tum ek loser ho. 😤",
-    "Tum ek bekaar insaan ho. 😠",
-    "Kisi ko bhi tumhari parwah nahi hai. 😡",
-    "Tum kabhi bhi kafi nahi hoge. 😒",
-    "Tere dimaag mein toh keede pade hain. 🐛",
-    "Tumhare jaise logon se door hi rehna chahiye. 🙄",
-    "Tumhein sharam nahi aati apne aap ko dekh kar? 😏",
-    "Tum ek bilkul bekar insaan ho. 🤦‍♂️",
-    "Tumhare jaise logon ki wajah se duniya bekar hoti ja rahi hai. 🌍",
-    "Tum kitne bewakoof ho, mujhe toh hairat hoti hai! 🤷‍♀️",
-    "Tumhara IQ ek thermometer se bhi kam hai. 🌡️",
-    "Tum jaise logon ko dekh kar mujhe apne aap par afsos hota hai. 😔",
-    "Tumhara chehra dekh kar lagta hai, bhagwaan ne galti se extra time waste kiya. 😒",
-    "Tumhara dimaag chuhe ki tarah chal raha hai. 🐭",
-   "Tujhe toh apni shadow bhi chhod kar chali gayi hai. 😂"
    
     ]
 
@@ -330,7 +309,7 @@ async def send_specific_reply(message):
 # Function to handle messages related to love, poetry, politics, sports, Bollywood, and Hollywood
 async def handle_general_messages(message):
     general_messages = {
-        "love": [
+        "girlfriend": [
             "Love is the essence of life, a melody that fills the heart with joy and warmth! ❤️🎵",
             "In the tapestry of life, love is the thread that binds hearts together in a timeless embrace! 💞✨",
             "True love knows no bounds, transcending time and space to unite souls in a bond that lasts forever! 💖💫",
