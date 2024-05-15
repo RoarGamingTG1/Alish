@@ -453,10 +453,6 @@ async def handle_messages(client, message):
             
     # Sending specific message for specific user
     await send_specific_reply(message)
-    # Reacting to the user post with a random emoji
-    emojis = ["👀", "😂", "😊", "👍", "❤️", "🎉"]  # List of emojis to choose from
-    reaction = random.choice(emojis)
-     await message.reply(reaction)
     
 
 # Run the bot
