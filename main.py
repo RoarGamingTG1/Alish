@@ -293,7 +293,7 @@ async def send_specific_reply(message):
         await sent_message.delete()
 
         # Reacting to the message with emojis
-        for emoji in ["😊", "👍", "❤️", "🎉", "😄"]:
+        for emoji in ["🥰", "👍", "❤️", "😁", "👏"]:
             await message.react(emoji)
 
         # Wait for 120 seconds before removing the emojis
