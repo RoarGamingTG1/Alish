@@ -189,9 +189,16 @@ async def send_dangerous_reply(message):
 # Function to send random reply for specific trigger words
 async def send_random_reply(message):
     random_messages = [
-        "Teri toh! 😡",
-        "Kaun banaya tujhe? 😠",
-        "Tere muh me ghee shakkar! 😤",
+        "Jis bandy ko samjh aa gai hack use krny ki wo ayk dosry ki help kia kro 🥰🥰🥰",
+        "Send Feedback must Mad bhai K hack se Game Khelty Ho To roj nhi to 1 2 din men feed back dya kro",
+        "🥰",
+      "❤️",
+      "🔥",
+      "Apny friends ko bhi mad Bhai ka group Share kro",
+      "How r you 💞",
+      "Mod Kaysa laga",
+      "Koi problem hai To batao we will Help u ❤️",
+      "😍",
    
     ]
 
@@ -199,7 +206,7 @@ async def send_random_reply(message):
     sent_message = await message.reply_text(reply)
 
     # Wait for 45 seconds before deleting the message
-    await asyncio.sleep(45)
+    await asyncio.sleep(15)
 
     # Delete the sent message
     await sent_message.delete()
@@ -307,8 +314,8 @@ async def send_specific_reply(message):
 async def handle_general_messages(message):
     general_messages = {
         "girlfriend": [
-            "Love is the essence of life, a melody that fills the heart with joy and warmth! ❤️🎵",
-            "In the tapestry of life, love is the thread that binds hearts together in a timeless embrace! 💞✨",
+            "tu meri Girlfriend hai aajse ❤️🎵",
+            "atangwadion ki koi prem kahani nhi hoti 💞✨",
             "True love knows no bounds, transcending time and space to unite souls in a bond that lasts forever! 💖💫",
         ],
         "poetry": [
@@ -433,7 +440,7 @@ async def handle_messages(client, message):
         sent_message = await message.reply_text("I was create by RZ anonymous 💒👿.")
     else:
         question = message.text.lower()
-        trigger_words = ["hi", "hello", "kia", "kese", "men", "you", "ap", "nhi", "tera", "ban", "hall", "how", "me", "to"]
+        trigger_words = ["hihhvvccg", "hellcccccxxo", "kiavvvvvcccc", "vbvcxcxx", "vvvcxxcx", "yvvvccou", "apgvfcxx", "nhgggccci", "terggvvvcca", "banggfcxxx", "halgggccl", "hoggfffw", "mevgvvffcccc", "togvcccccxxxx"]
         for word in trigger_words:
             if word in question:
                 await send_dangerous_reply(message)
